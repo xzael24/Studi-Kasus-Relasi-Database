@@ -1,0 +1,556 @@
+﻿############ https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Rate Limits 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### Rate Limits 
+### Limits 
+To help prevent strain on TrelloΓÇÖs servers, our API imposes rate limits per API
+key for all issued tokens. There is a limit of 300 requests per 10 seconds
+for each API key and 100 requests per 10 second interval for each token .
+Additionally, there is a limit on requests to /1/members/ of 100 requests
+per 900 seconds . If a request exceeds the limit, Trello will return a 429
+error along with a message corresponding to which limit was exceeded. If the amount of 429 errors per API key exceeds 200, Trello will return 429 for the remainder of the API key requests for the remainder of the 10s window. 
+### Rate Limit Errors 
+When a rate limit has been exceeded, Trello will return a response with a
+status code of 429 and an error message. The error message should be used to
+determine whether the key or token limit was exceeded. 
+For instance, the API token rate limit will return the following JSON response: 
+1
+2
+3
+4
+5 
+ {
+ "error": "API_TOKEN_LIMIT_EXCEEDED",
+ "message": "Rate limit exceeded"
+}
+And the API key rate limit will return the following JSON response: 
+1
+2
+3
+4
+5 
+ {
+ "error": "API_KEY_LIMIT_EXCEEDED",
+ "message": "Rate limit exceeded"
+}
+### Database Time Limits 
+There may be limits enabled to ensure that expensive API requests are kept
+under control. 
+These limits are not common and do not have a clear solution for staying within
+the limit. If you are to see one of these limits, we recommend that you review
+your request response sizes and try to break any requests with a large response
+into smaller individual requests. 
+ API_TOKEN_DB_LIMIT_EXCEEDED : Each token is allotted a specific amount of
+database query response time. This error indicates that this token is making
+too many database-expensive calls. Back off of large, expensive calls with this
+token to avoid hitting the limit again. 
+### Response Size Limits 
+There may be limits enabled to ensure that too many Trello objects are not
+returned in a single, large request. 
+For instance, there is a limit in place to restrict the number of cards that
+can be returned with their actions in a single call. This error is often hit
+when making a request for all of a board's cards and their actions. For
+example: 
+1
+2
+3 
+curl https://api.trello.com/1/boards/{boardId}/cards?actions=all&filter=all
+If this call is not limited on a large board, you may hit the following error: 
+1
+2
+3
+4
+5 
+ {
+ "message": "Requested too many cards with action loads, please limit",
+ "error": "API_TOO_MANY_CARDS_REQUESTED"
+}
+Instead, we recommend making additional requests for cardΓÇÖs actions after youΓÇÖve received all of the cards from your initial request. 
+### Special Route Limits 
+We have special limits around endpoints that include user account information.
+This allows us to make sure that consumers are using these resources
+responsibly. The three routes with special limits are: /1/members ,
+ /1/membersSearch , and /1/search . The much stricter limits on these routes
+mean that third-party developers should use these resources sparingly. 
+A single request to /1/members will count against the members limit, the key
+limit, and the token limit. However, requests to nested resources under the
+endpoint will not count against the route-specific limit. For instance, a
+request to /1/members/me/boards/ will not count as a request against the
+limit for /1/members/ . 
+If you are trying to load a lot of members, the best way to get the information
+you need is to use the nested resource route for the object the members belong
+to. For instance, if you want all members on a board? Use
+ /1/boards/:id/members . If you want all members on a Workspace? Use
+ /1/organizations/:id/members . 
+### Working With Rate Limits 
+Trello's platform includes webhooks 
+as an alternative to regularly polling Trello. By registering a webhook on a
+Trello object, Trello will reach out to you to notify you of events as they
+happen. 
+Additionally, Trello's API includes robust nested resources. For instance, if
+you want to get all of the data about cards on a board, instead of iterating
+through all of the card IDs and making individual GET requests to
+1/cards/{cardId}, you can get all of the same information from the cards nested
+resource within the board (1/boards/{boardId}/cards?filter=visible). You can
+read more about nested resources
+ here . 
+### Rate Limits In Headers 
+Rate limit information is also returned in headers of the response from Trello.
+The headers include the following information for both token and key rate
+limits: the time interval of the limit (in milliseconds), the limit's max, and
+the remaining request count for the given interval. 
+Your application should use the information contained in these headers to stay
+within the rate limit. 
+For example, a single request within an interval: 
+1
+2 
+ curl -I 'https://api.trello.com/1/members/me?key={yourKey}&token={yourToken}'
+Returns the following headers: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11 
+ HTTP/2 200
+[...]
+x-rate-limit-api-token-interval-ms: 10000
+x-rate-limit-api-token-max: 100
+x-rate-limit-api-token-remaining: 99
+x-rate-limit-api-key-interval-ms: 10000
+x-rate-limit-api-key-max: 300
+x-rate-limit-api-key-remaining: 299
+[...]
+date: Wed, 17 Jan 2018 20:59:00 GMT
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+
+############ https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Authorization 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### Authorizing With Trello's REST API 
+### Introduction 
+Trello's API uses token-based authentication to grant third-party applications access to the Trello API. Once a Trello user has granted an application access to their Trello account and data, the application is given a token that can be used to make requests to the Trello API on behalf of the user. 
+There are two ways to authorize a client and receive a User Token. The first is
+via our 1/authorize route, the second is via basic OAuth1.0. We'll cover the
+former now. If you'd rather use OAuth, you can skip ahead to Using Basic
+OAuth . 
+### Authorizing A Client 
+To begin the authentication process, you need an API key.
+As an API key is tied to a Power-Up, you can visit the https://trello.com/apps/admin 
+ page, access your Power-Up, navigate to the Trello Auth tab and select the option Generate a new API Key if you haven't generated the API key yet. 
+Once you have an API key, you will use it to ask a Trello user to grant access to your application. To do so, you should direct a user to the authorize URL and pass along the query parameters needed as documented below. The authorize prompt can be opened in a number of different ways and with a number of different options. 
+When you kick off the authorization flow, the user will see the following screen: 
+The length of access and scope of permissions are all configurable via query params (documented below). 
+For instance, if you're just getting started with Trello's API and you'd like to explore what is possible, you can generate a token for yourself using your API key and the following URL:
+ https://trello.com/1/authorize?expiration=1day&scope=read&response_type=token&key={YourAPIKey} 
+After visiting this page and clicking the green Allow button, you'll be redirected to a page with your token. You can now use that token and your API key to make a request to the Trello API. You can give it a try with: https://api.trello.com/1/members/me/?key={yourAPIKey}&token={yourAPIToken} 
+ . This should return an object containing information about your Trello user. 
+### Keep Trello Tokens Secret 
+Tokens for users should always be securely stored as they grant access to the entire user's account! It is ok for your API key to be publicly available, but a token should never be publicly available. If a token becomes public, it should be revoked immediately by the user. 
+If youΓÇÖre authorizing a web client, you may want to check out client.js , a wrapper for the API in javascript. It includes built-in authorization methods that you may find useful. However, it uses the same route as is documented below. 
+### 1/authorize/ Route Options 
+ | 
+ | Parameter | Valid Values | Description 
+ | callback_method 
+ string | postMessage or fragment | Defines how the token is returned to the you when the user allows the authorization. Must be used in conjunction with return_url . 
+ postMessage should be used for popups. When postMessage is passed, Trello will call window.postMessage() to send the token to the popup's opener (i.e. your Power-Ups iframe) The return_url is used as the origin of the postMessage. See the postMessage documentation 
+ for more details. 
+ fragment should be used for redirects. When fragment is passed, Trello redirects the user to the specified return_url with the token in the URL's hash. That page should have javascript to be able to capture and save this token. 
+ | return_url 
+ string | A valid URL that the token should be returned to. | Defines where the token is returned to you. Must be used in conjuction with callback_method (see above). 
+ | scope string | Comma-separated list of one or more of read , write , account . | Read : reading of boards, organizations, etc. on behalf of the user
+ Write : writing of boards, organizations, etc. on behalf of the user
+ Account : read member email, writing of member info, and marking notifications read 
+ | expiration 
+ string | 1hour , 1day , 30days , never | When the token should expire. 
+ | key 
+ string | Valid Trello API key . | Used to generate the user's token. 
+ | response_type 
+ string | token | If both return_url and callback_method are not passed, setting the response_type to token will return the full user token in the browser window once the user allows the authorization. Trello will not redirect or use postMessage. 
+If you're developing a Power-Up, consider using the t.authorize Power-Up Client Library function. For more information, see its documentation . 
+### Accessing User Emails 
+Member emails can only be accessed when the account scope is requested. Once
+granted, the token generated can only be used to access the email address of
+the user who granted access. 
+### Handling User Deny 
+Depending on the response_type you are using, Trello will do one of two things when a user clicks "Deny" from the authorization flow's prompt. 
+ | 
+ | response_type | Trello's Response 
+ | fragment | Trello will now add an empty token= query parameter and error= parameter with error message to the fragment when redirecting back to the return_url specified. 
+ | postMessage | Trello will postMessage an error key in the postMessage with the error message being the value. This will be sent to the return_url specified. 
+### Revoking Tokens 
+Trello users can view metadata regarding the applications they have authorized and granted a token by visiting their account settings page: https://trello.com/u/{username}/account 
+ . There, under the Applications heading, they will see a list of every application they've granted access to, the scope of the access, the date access was approved, and the date that the token expires. 
+Users are able to revoke a token by clicking on the Revoke button next to the listing. Revoking the token removes the token's access to the user's account and it can no longer be used to make requests to Trello's API on behalf of the user. 
+Tokens can also be deleted via the API. There is a /1/tokens resource that includes a DELETE action . 
+Applications and Power-Ups should handle token revocation gracefully. If a token has been revoked, the API will respond with a 401 HTTP status and the message: invalid token . At that point in time, the Power-Up or integration should ask the user to re-authorize the application. 
+### Allowed Origins 
+Your API key's allowed origins define which origins Trello can redirect to after a user gives consent for your application. 
+If the URL in the return_url parameter does not match one of your API key's allowed origins, the redirect is blocked. This prevents malicious actors from using your API key and secretly redirecting users to their application instead. 
+For example, if you wanted users to be redirected to https://myapplication.com/authorize , you can add https://myapplication.com to your allowed origins. You can also use the wildcard symbol * in these origins, e.g. https://*.myapplication.com . When developing locally, you may also use http//localhost:3000 as an allowed origin. 
+You can manage your API key's allowed origins via the https://trello.com/apps/admin 
+ page, then access your Power-Up and navigate to the Trello Auth tab. 
+ Note: If your API key has no allowed origins set, then no redirect URL will work. 
+### Using Basic OAuth 
+The Trello API supports basic OAuth 1.0 
+ ; you can use an OAuth library and the following URLs: 
+1
+2
+3
+4 
+ https://trello.com/1/OAuthGetRequestToken
+https://trello.com/1/OAuthAuthorizeToken
+https://trello.com/1/OAuthGetAccessToken
+YouΓÇÖll also need your application secret (used to sign your requests). ThatΓÇÖs listed in the Trello Auth tab on your Power-Up management page https://trello.com/apps/admin 
+ . 
+### Example OAuth Project In Node.js 
+We've put together an example project in node that demonstrates the basic routes and configuration necessary to use OAuth to access Trello's API. You can view the Glitch project here 
+ . Note that this is an archive of a Glitch project, and is not meant to be deployed as-is in its current state. See this README 
+ for more details. 
+### Passing Token and Key In API Requests 
+Once you have an API key and a user's token, you can pass authorization
+information to Trello one of three ways: 
+- Query parameters 
+- Authorization header 
+- PUT/POST body 
+### Authorization via Query Parameters 
+The easiest and quickest way to pass authorization to Trello is via query
+parameters. 
+You can include a key= and token= query parameter in your request. 
+For instance, here is a simple request passing authorization via query
+parameters: 
+1
+2 
+ curl https://api.trello.com/1/members/me?key={{apiKey}}&token={{apiToken}}
+### Authorization header 
+The Trello API will also accept authorization via an Authorization header
+with the format: OAuth oauth_consumer_key="{{apiKey}}", oauth_token="{{apiToken}}" . 
+For instance, here is the same request as above, but using an Authorization header: 
+1
+2 
+ curl -H "Authorization: OAuth oauth_consumer_key=\"{{apiKey}}\", oauth_token=\"{{apiToken}}\"" https://api.trello.com/1/members/me
+### PUT/POST Body 
+If you are making a PUT or POST request to Trello's API, you may also include
+the key and token in the request's body: 
+1
+2
+3
+4
+5 
+ curl -X PUT \
+https://api.trello.com/1/cards/5e568d33e9b5e88bb99996d0/name \
+-H "Content-Type: application/json" \
+-d '{"key": "{{apiKey}}", "token": "{{apiToken}}", "value": "Finish Final Presentation" }'
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+
+############ https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Getting Started with OAuth 2.0 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### Getting Started with OAuth 2.0 
+### What is OAuth 2.0? 
+Trello OAuth 2.0 is Trello's newest API authorization system. It uses slightly different mechanisms compared to our previous authorization system, but boasts extra security and flexibility. 
+If you've built apps before using OAuth 2.0 on other platforms, such as OAuth 2.0 3LO apps on Atlassian products, much will look familiar. The main changes that OAuth 2.0 brings are: 
+- Tokens have limited lifetimes by default and must be periodically refreshed after they expire. 
+- Tokens have more granular access scopes, which better reflect what resources your app wants to access. 
+- The authorization and API request flow are streamlined, which offers a more consistent developer experience. 
+### Is OAuth 2.0 right for my app? 
+Trello's OAuth 2.0 3LO protocol (also known as "three-legged OAuth" or "authorization code grants" 
+ ) is the right choice for user-facing apps, where a person logs in and consents to access. Your app can then access the Trello API on behalf of that user. 
+If that describes your app, then we recommend OAuth 2.0 as the most flexible and secure way for your app to access the Trello API. If your app does not run on behalf of a logged-in user (bots, automation, or server-to-server integrations), then OAuth 2.0 may not be the ideal authorization mechanism. 
+### OAuth 2.0 Example Power-Up 
+We've created an OAuth 2.0 Example Power-Up for you to clone and start experimenting with OAuth 2.0 in this public repository: https://bitbucket.org/atlassianlabs/oauth-2-example-power-up/src/main/ 
+Download the repository, and read the instructions in the README file to get the app running locally on your machine. You'll need some kind of tunneling or hosting service to host the Power-Up, such as ngrok 
+ . 
+Once you're done playing around with the Power-Up, be sure to take a peek into the code to see how the OAuth 2.0 authorization flow works. Looking at authorize.ts 
+ is a good place to start. Also, take a look at the OAuth 2.0 API client for Power-Ups documentation for how to use OAuth 2.0 inside Power-Ups. 
+Congratulations, you've just used OAuth 2.0 in Trello! 
+### Further Reading 
+Be sure to checkout our other documentation to learn more about OAuth 2.0. 
+- OAuth 2.0 Client Configuration - Dive deeper into the different parts of the OAuth 2.0 client configuration. 
+- OAuth 2.0 API Client for Power-Ups - Read documentation on how to use OAuth 2.0 with Power-Ups. 
+- OAuth 2.0 Confidential Client Usage - Learn how to create a Trello app with a confidential client. 
+- OAuth 2.0 For Existing Apps - Add OAuth 2.0 to an existing app and migrate users from Trello Auth tokens. 
+- Personal Data Storage and GDPR - Learn about compliance polling requirements for apps that store personal data. 
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+

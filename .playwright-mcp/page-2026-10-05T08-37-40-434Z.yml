@@ -1,0 +1,378 @@
+- generic [ref=f57e2]:
+  - link "Skip to main content" [ref=f57e3] [cursor=pointer]:
+    - /url: "#skip-target"
+  - banner [ref=f57e4]:
+    - generic [ref=f57e6]:
+      - link [ref=f57e8] [cursor=pointer]:
+        - /url: /home
+        - img "Atlassian Trello" [ref=f57e9]
+      - button [ref=f57e28] [cursor=pointer]
+    - generic:
+      - generic [ref=f57e34]:
+        - generic [ref=f57e36]:
+          - button "Features" [ref=f57e37] [cursor=pointer]
+          - button "Solutions" [ref=f57e40] [cursor=pointer]
+          - button "Plans" [ref=f57e43] [cursor=pointer]
+          - link "Pricing" [ref=f57e46] [cursor=pointer]:
+            - /url: /pricing
+          - button "Resources" [ref=f57e47] [cursor=pointer]
+        - generic [ref=f57e50]:
+          - link "Get Trello for free" [ref=f57e51] [cursor=pointer]:
+            - /url: https://id.atlassian.com/signup?application=trello--direct-signup&continue=https%3A%2F%2Ftrello.com%2Fauth%2Fatlassian%2Fcallback%3FcreateMember%3Dtrue&anonId=0a944ba4-0137-4470-9ff1-050df2eadc4e
+          - link "Log in" [ref=f57e52] [cursor=pointer]:
+            - /url: https://id.atlassian.com/login?application=trello--direct-signup&continue=https%3A%2F%2Ftrello.com%2Fauth%2Fatlassian%2Fcallback&anonId=0a944ba4-0137-4470-9ff1-050df2eadc4e
+      - generic [ref=f57e54]:
+        - generic [ref=f57e56]:
+          - heading "Explore the features that help your team succeed" [level=2] [ref=f57e57]
+          - link [ref=f57e60] [cursor=pointer]:
+            - /url: /inbox
+            - paragraph [ref=f57e66]: Inbox
+            - paragraph [ref=f57e68]: Capture every vital detail from emails, Slack, and more directly into your Trello Inbox.
+          - link [ref=f57e71] [cursor=pointer]:
+            - /url: /planner
+            - paragraph [ref=f57e76]: Planner
+            - paragraph [ref=f57e78]: Sync your calendar and allocate focused time slots to boost productivity.
+          - link [ref=f57e81] [cursor=pointer]:
+            - /url: /butler-automation
+            - paragraph [ref=f57e86]: Automation
+            - paragraph [ref=f57e88]: Automate tasks and workflows with Trello.
+          - link [ref=f57e91] [cursor=pointer]:
+            - /url: /power-ups
+            - paragraph [ref=f57e97]: Power-Ups
+            - paragraph [ref=f57e99]: Power up your teams by linking their favorite tools with Trello plugins.
+          - link [ref=f57e102] [cursor=pointer]:
+            - /url: /templates
+            - paragraph [ref=f57e109]: Templates
+            - paragraph [ref=f57e111]: Give your team a blueprint for success with easy-to-use templates from industry leaders and the Trello community.
+          - link [ref=f57e114] [cursor=pointer]:
+            - /url: /integrations
+            - paragraph [ref=f57e119]: Integrations
+            - paragraph [ref=f57e121]: Find the apps your team is already using or discover new ways to get work done in Trello.
+          - link [ref=f57e124] [cursor=pointer]:
+            - /url: /mcp
+            - paragraph [ref=f57e132]: MCP server
+            - paragraph [ref=f57e134]: Connect Trello to any AI tool
+        - generic [ref=f57e137]:
+          - generic [ref=f57e138]:
+            - heading "Meet Trello" [level=3] [ref=f57e141]
+            - paragraph [ref=f57e143]: Trello makes it easy for your team to get work done. No matter the project, workflow, or type of team, Trello can help keep things organized. It’s simple – sign-up, create a board, and you’re off! Productivity awaits.
+          - link "Check out Trello" [ref=f57e146] [cursor=pointer]:
+            - /url: /tour
+      - generic [ref=f57e149]:
+        - generic [ref=f57e151]:
+          - heading "Take a page out of these pre-built Trello playbooks designed for all teams" [level=2] [ref=f57e152]
+          - link [ref=f57e155] [cursor=pointer]:
+            - /url: /teams/marketing
+            - paragraph [ref=f57e161]: Marketing teams
+            - paragraph [ref=f57e163]: Whether launching a new product, campaign, or creating content, Trello helps marketing teams succeed.
+          - link [ref=f57e166] [cursor=pointer]:
+            - /url: /teams/product
+            - paragraph [ref=f57e172]: Product management
+            - paragraph [ref=f57e174]: Use Trello’s management boards and roadmap features to simplify complex projects and processes.
+          - link [ref=f57e177] [cursor=pointer]:
+            - /url: /teams/engineering
+            - paragraph [ref=f57e185]: Engineering teams
+            - paragraph [ref=f57e187]: Ship more code, faster, and give your developers the freedom to be more agile with Trello.
+          - link [ref=f57e190] [cursor=pointer]:
+            - /url: /teams/design
+            - paragraph [ref=f57e196]: Design teams
+            - paragraph [ref=f57e198]: Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.
+          - link [ref=f57e201] [cursor=pointer]:
+            - /url: /teams/startups
+            - paragraph [ref=f57e207]: Startups
+            - paragraph [ref=f57e209]: From hitting revenue goals to managing workflows, small businesses thrive with Trello.
+          - link [ref=f57e212] [cursor=pointer]:
+            - /url: /teams/remote-team-management
+            - paragraph [ref=f57e219]: Remote teams
+            - paragraph [ref=f57e221]: Keep your remote team connected and motivated, no matter where they’re located around the world.
+          - link "See all teams" [ref=f57e222] [cursor=pointer]:
+            - /url: /teams
+        - generic [ref=f57e227]:
+          - heading "Our product in action" [level=3] [ref=f57e228]
+          - paragraph [ref=f57e229]: Read though our use cases to make the most of Trello on your team.
+          - link "See all use cases" [ref=f57e233] [cursor=pointer]:
+            - /url: /use-cases
+      - generic [ref=f57e236]:
+        - generic [ref=f57e238]:
+          - link [ref=f57e241] [cursor=pointer]:
+            - /url: /standard
+            - paragraph [ref=f57e247]: Standard
+            - paragraph [ref=f57e249]: For teams that need to manage more work and scale collaboration.
+          - link [ref=f57e252] [cursor=pointer]:
+            - /url: /premium
+            - paragraph [ref=f57e257]: Premium
+            - paragraph [ref=f57e259]: Best for teams up to 100 that need to track multiple projects and visualize work in a variety of ways.
+          - link [ref=f57e262] [cursor=pointer]:
+            - /url: /enterprise
+            - paragraph [ref=f57e268]: Enterprise
+            - paragraph [ref=f57e270]: Everything your enterprise teams and admins need to manage projects.
+        - generic [ref=f57e271]:
+          - generic [ref=f57e272]:
+            - paragraph [ref=f57e279]: Free plan
+            - paragraph [ref=f57e281]: For individuals or small teams looking to keep work organized.
+          - link "Take a tour of Trello" [ref=f57e284] [cursor=pointer]:
+            - /url: /tour
+        - generic [ref=f57e288]:
+          - generic [ref=f57e289]:
+            - heading "Compare plans & pricing" [level=3] [ref=f57e292]
+            - paragraph [ref=f57e294]: Whether you’re a team of 2 or 2,000, Trello’s flexible pricing model means you only pay for what you need.
+          - link "View Trello pricing" [ref=f57e297] [cursor=pointer]:
+            - /url: /pricing
+      - generic [ref=f57e300]:
+        - generic [ref=f57e302]:
+          - heading "Learn & connect" [level=2] [ref=f57e303]
+          - link [ref=f57e306] [cursor=pointer]:
+            - /url: /guide
+            - paragraph [ref=f57e308]: Trello guide
+            - paragraph [ref=f57e310]: Our easy to follow workflow guide will take you from project set-up to Trello expert in no time.
+          - link [ref=f57e313] [cursor=pointer]:
+            - /url: /guide/remote-work
+            - paragraph [ref=f57e315]: Remote work guide
+            - paragraph [ref=f57e317]: The complete guide to setting up your team for remote work success.
+          - link [ref=f57e320] [cursor=pointer]:
+            - /url: /webinars
+            - paragraph [ref=f57e322]: Webinars
+            - paragraph [ref=f57e324]: Enjoy our free Trello webinars and become a productivity professional.
+          - link [ref=f57e327] [cursor=pointer]:
+            - /url: /customers
+            - paragraph [ref=f57e329]: Customer stories
+            - paragraph [ref=f57e331]: See how businesses have adopted Trello as a vital part of their workflow.
+          - link [ref=f57e334] [cursor=pointer]:
+            - /url: https://developer.atlassian.com/cloud/trello/
+            - paragraph [ref=f57e336]: Developers
+            - paragraph [ref=f57e338]: The sky's the limit in what you can deliver to Trello users in your Power-Up!
+          - link [ref=f57e341] [cursor=pointer]:
+            - /url: https://support.atlassian.com/trello/
+            - paragraph [ref=f57e343]: Help resources
+            - paragraph [ref=f57e345]: Need help? Articles and FAQs to get you unstuck.
+        - generic [ref=f57e348]:
+          - paragraph [ref=f57e350]
+          - paragraph [ref=f57e352]
+        - generic [ref=f57e356]:
+          - generic [ref=f57e357]:
+            - heading "Helping teams work better, together" [level=3] [ref=f57e360]
+            - paragraph [ref=f57e362]: Discover Trello use cases, productivity tips, best practices for team collaboration, and expert remote work advice.
+          - link "Check out the Trello blog" [ref=f57e365] [cursor=pointer]:
+            - /url: https://www.atlassian.com/blog/trello
+  - main [ref=f57e367]:
+    - paragraph [ref=f57e374]:
+      - text: Accelerate your teams' work with AI features 🤖 now available for all Premium and Enterprise!
+      - link "Learn more." [ref=f57e375] [cursor=pointer]:
+        - /url: https://www.atlassian.com/software/artificial-intelligence
+    - generic [ref=f57e378]:
+      - generic [ref=f57e379]:
+        - generic [ref=f57e381]:
+          - heading "Capture, organize, and tackle your to-dos from anywhere." [level=1] [ref=f57e382]
+          - paragraph [ref=f57e383]: Escape the clutter and chaos—unleash your productivity with Trello.
+        - generic [ref=f57e385]:
+          - textbox "Email" [ref=f57e386]
+          - button "Sign up for Trello - it’s free!" [ref=f57e388] [cursor=pointer]: Sign up - it’s free!
+        - paragraph [ref=f57e391]:
+          - text: By entering my email, I acknowledge the
+          - link "Atlassian Privacy Policy" [ref=f57e392] [cursor=pointer]:
+            - /url: https://www.atlassian.com/legal/privacy-policy
+        - link "Watch video" [ref=f57e396] [cursor=pointer]:
+          - /url: "#video"
+      - generic [ref=f57e402]: Hero
+    - generic [ref=f57e404]:
+      - generic [ref=f57e407]:
+        - paragraph [ref=f57e409]: Trello 101
+        - paragraph [ref=f57e411]: Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game.
+      - generic [ref=f57e416]:
+        - img "Illustration of a team Trello Board" [ref=f57e425]
+        - generic [ref=f57e437]:
+          - generic [ref=f57e439]:
+            - button [ref=f57e441] [cursor=pointer]:
+              - generic [ref=f57e442]:
+                - heading "Inbox" [level=4] [ref=f57e443]
+                - paragraph [ref=f57e444]: When it’s on your mind, it goes in your Inbox. Capture your to-dos from anywhere, anytime.
+            - button [ref=f57e446] [cursor=pointer]:
+              - generic [ref=f57e447]:
+                - heading [level=4] [ref=f57e448]: Boards
+                - paragraph [ref=f57e449]: Your to-do list may be long, but it can be manageable! Keep tabs on everything from "to-dos to tackle" to "mission accomplished!”
+            - button [ref=f57e451] [cursor=pointer]:
+              - generic [ref=f57e452]:
+                - heading [level=4] [ref=f57e453]: Planner
+                - paragraph [ref=f57e454]: Drag, drop, get it done. Snap your top tasks into your calendar and make time for what truly matters.
+          - generic [ref=f57e456]:
+            - button "Dot 1" [ref=f57e457] [cursor=pointer]
+            - button "Dot 2" [ref=f57e458] [cursor=pointer]
+            - button "Dot 3" [ref=f57e459] [cursor=pointer]
+    - generic [ref=f57e462]:
+      - generic [ref=f57e465]:
+        - heading [level=2] [ref=f57e466]:
+          - strong [ref=f57e467]: From message to action
+        - paragraph [ref=f57e468]: Quickly turn communication from your favorite apps into to-dos, keeping all your discussions and tasks organized in one place.
+      - generic [ref=f57e470]:
+        - img "An illustration showing email magic" [ref=f57e473]
+        - generic [ref=f57e474]:
+          - heading "EMAIL MAGIC" [level=3] [ref=f57e476]
+          - paragraph [ref=f57e478]: Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by AI into organized to-dos with all the links you need.
+      - generic [ref=f57e480]:
+        - img "An illlustration showing the Calendar view of a Trello board" [ref=f57e483]
+        - generic [ref=f57e484]:
+          - heading "MESSAGE APP SORCERY" [level=3] [ref=f57e486]
+          - paragraph [ref=f57e488]: Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links.
+    - generic [ref=f57e493]:
+      - paragraph [ref=f57e495]: WORK SMARTER
+      - paragraph [ref=f57e497]: Customize the way you organize with easy integrations, automation, and mirroring of your to-dos across multiple locations.
+    - generic [ref=f57e500]:
+      - generic [ref=f57e503]:
+        - generic [ref=f57e505]:
+          - heading "Integrations" [level=3] [ref=f57e506]
+          - paragraph [ref=f57e507]: Connect the apps you are already using into your Trello workflow or add a Power-Up to fine-tune your specific needs.
+        - link "Browse Integrations" [ref=f57e509] [cursor=pointer]:
+          - /url: /integrations
+      - generic [ref=f57e513]:
+        - generic [ref=f57e515]:
+          - heading "Automation" [level=3] [ref=f57e516]
+          - paragraph [ref=f57e517]: No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.
+        - link "Get to know Automation" [ref=f57e519] [cursor=pointer]:
+          - /url: /butler-automation
+      - generic [ref=f57e523]:
+        - generic [ref=f57e525]:
+          - heading "Card mirroring" [level=3] [ref=f57e526]
+          - paragraph [ref=f57e527]: View all your to-dos from multiple boards in one place. Mirror a card to keep track of work wherever you need it!
+        - link "Compare plans" [ref=f57e529] [cursor=pointer]:
+          - /url: /pricing
+    - generic [ref=f57e536]:
+      - generic [ref=f57e538]:
+        - generic [ref=f57e541]:
+          - figure [ref=f57e542]:
+            - blockquote [ref=f57e543]:
+              - paragraph [ref=f57e545]: "[Trello is] great for simplifying complex processes. As a manager, I can chunk [processes] down into bite-sized pieces for my team and then delegate that out, but still keep a bird's-eye view."
+            - generic [ref=f57e546]:
+              - paragraph [ref=f57e547]: Joey Rosenberg
+              - paragraph [ref=f57e548]: Global Leadership Director at Women Who Code
+              - generic [ref=f57e549]:
+                - img "Women Who Code company logo" [ref=f57e550]
+                - link "Read the Women Who Code customer story" [ref=f57e551] [cursor=pointer]:
+                  - /url: https://blog.trello.com/women-who-code
+                  - text: Read the story
+          - generic [ref=f57e552]:
+            - heading "75% of organizations report that Trello delivers value to their business within 30 days." [level=3] [ref=f57e553]
+            - link "Trello TechValidate Survey" [ref=f57e555] [cursor=pointer]:
+              - /url: https://www.techvalidate.com/tvid/1D4-3E6-170
+        - generic [ref=f57e558]:
+          - figure [ref=f57e559]:
+            - blockquote [ref=f57e560]:
+              - paragraph [ref=f57e562]: Whether someone is in the office, working from home, or working on-site with a client, everyone can share context and information through Trello.
+            - generic [ref=f57e563]:
+              - paragraph [ref=f57e564]: Sumeet Moghe
+              - paragraph [ref=f57e565]: Product Manager at ThoughtWorks
+              - link [ref=f57e568] [cursor=pointer]:
+                - /url: https://www.atlassian.com/customers/thoughtworks
+                - text: Read the story
+          - generic [ref=f57e569]:
+            - heading [level=3] [ref=f57e570]: 81% of customers chose Trello for its ease of use.
+            - link [ref=f57e572] [cursor=pointer]:
+              - /url: https://www.techvalidate.com/tvid/270-DFB-21A
+              - text: Trello TechValidate Survey
+        - generic [ref=f57e575]:
+          - figure [ref=f57e576]:
+            - blockquote [ref=f57e577]:
+              - paragraph [ref=f57e579]: We used Trello to provide clarity on steps, requirements, and procedures. This was exceptional when communicating with teams that had deep cultural and language differences.
+            - generic [ref=f57e580]:
+              - paragraph [ref=f57e581]: Jefferson Scomacao
+              - paragraph [ref=f57e582]: Development Manager at IKEA/PTC
+              - link [ref=f57e585] [cursor=pointer]:
+                - /url: https://www.atlassian.com/customers/ptc
+                - text: Read the story
+          - generic [ref=f57e586]:
+            - heading [level=3] [ref=f57e587]: 74% of customers say Trello has improved communication with their co-workers and teams.
+            - link [ref=f57e589] [cursor=pointer]:
+              - /url: https://www.techvalidate.com/tvid/CDB-6BC-D03
+              - text: Trello TechValidate Survey
+      - generic [ref=f57e590]:
+        - generic [ref=f57e591]:
+          - button "Dot 1" [ref=f57e592] [cursor=pointer]
+          - button "Dot 2" [ref=f57e593] [cursor=pointer]
+          - button "Dot 3" [ref=f57e594] [cursor=pointer]
+        - button "Previous" [ref=f57e595] [cursor=pointer]
+        - button "Next" [ref=f57e599] [cursor=pointer]
+    - generic [ref=f57e606]:
+      - generic [ref=f57e608]:
+        - paragraph [ref=f57e609]: Join a community of millions of users globally who are using Trello to get more done.
+        - paragraph
+      - 'img "Company logos: Visa, Coinbase, John Deere, Zoom, Grand Hyatt and Fender" [ref=f57e610]'
+    - generic [ref=f57e614]:
+      - generic [ref=f57e616]:
+        - heading "Get started with Trello today" [level=2] [ref=f57e617]
+        - paragraph
+      - generic [ref=f57e618]:
+        - textbox "Email" [ref=f57e619]
+        - button "Sign up for Trello - it’s free!" [ref=f57e621] [cursor=pointer]: Sign up - it’s free!
+      - paragraph [ref=f57e624]:
+        - text: By entering my email, I acknowledge the
+        - link "Atlassian Privacy Policy" [ref=f57e625] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/privacy-policy
+  - contentinfo [ref=f57e626]:
+    - generic [ref=f57e629]:
+      - generic [ref=f57e631]:
+        - img "Atlassian Trello" [ref=f57e632]
+        - link "Log In" [ref=f57e651] [cursor=pointer]:
+          - /url: https://id.atlassian.com/login?application=trello--direct-signup&continue=https%3A%2F%2Ftrello.com%2Fauth%2Fatlassian%2Fcallback&anonId=0a944ba4-0137-4470-9ff1-050df2eadc4e
+      - list [ref=f57e654]:
+        - listitem [ref=f57e655]:
+          - link [ref=f57e656] [cursor=pointer]:
+            - /url: /about
+            - paragraph [ref=f57e658]: About Trello
+            - paragraph [ref=f57e660]: What’s behind the boards.
+        - listitem [ref=f57e661]:
+          - link [ref=f57e662] [cursor=pointer]:
+            - /url: https://www.atlassian.com/company/careers/trello
+            - paragraph [ref=f57e664]: Jobs
+            - paragraph [ref=f57e666]: Learn about open roles on the Trello team.
+        - listitem [ref=f57e667]:
+          - link [ref=f57e668] [cursor=pointer]:
+            - /url: /platforms
+            - paragraph [ref=f57e670]: Apps
+            - paragraph [ref=f57e672]: Download the Trello App for your Desktop or Mobile devices.
+        - listitem [ref=f57e673]:
+          - link [ref=f57e674] [cursor=pointer]:
+            - /url: /contact
+            - paragraph [ref=f57e676]: Contact us
+            - paragraph [ref=f57e678]: Need anything? Get in touch and we can help.
+    - generic [ref=f57e681]:
+      - combobox "Select a language" [ref=f57e685] [cursor=pointer]:
+        - option "Čeština"
+        - option "Deutsch"
+        - option "English" [selected]
+        - option "Español"
+        - option "Français"
+        - option "Italiano"
+        - option "Magyar"
+        - option "Nederlands"
+        - option "Norsk (bokmål)"
+        - option "Polski"
+        - option "Português (Brasil)"
+        - option "Suomi"
+        - option "Svenska"
+        - option "Tiếng Việt"
+        - option "Türkçe"
+        - option "Русский"
+        - option "Українська"
+        - option "ภาษาไทย"
+        - option "中文 (简体)"
+        - option "中文 (繁體)"
+        - option "日本語"
+      - navigation [ref=f57e687]:
+        - list [ref=f57e688]:
+          - listitem [ref=f57e689]:
+            - link "Privacy Policy" [ref=f57e690] [cursor=pointer]:
+              - /url: https://www.atlassian.com/legal/privacy-policy
+          - listitem [ref=f57e691]:
+            - link "Terms" [ref=f57e692] [cursor=pointer]:
+              - /url: https://www.atlassian.com/legal/cloud-terms-of-service
+          - listitem [ref=f57e693]: Copyright © 2026 Atlassian
+      - generic [ref=f57e695]:
+        - link "Instagram" [ref=f57e696] [cursor=pointer]:
+          - /url: https://www.instagram.com/trelloapp/
+        - link "Facebook" [ref=f57e699] [cursor=pointer]:
+          - /url: https://www.facebook.com/trelloapp/
+        - link "LinkedIn" [ref=f57e702] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/atlassian/
+        - link "Twitter" [ref=f57e708] [cursor=pointer]:
+          - /url: https://twitter.com/trello
+        - link "Youtube" [ref=f57e711] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UCRcOkXoOrU6sN1yCz20VmQw

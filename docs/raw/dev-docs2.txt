@@ -1,0 +1,638 @@
+﻿############ https://developer.atlassian.com/cloud/trello/guides/power-ups/authentication/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Authentication 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### Authentication 
+Your Power-Up may interact with other third party services and may need authentication with them. 
+You should only require authentication when it is required by the user. Here are
+some samples of ways that Power-Ups can trigger an authentication workflow: 
+- For our Dropbox Power-Up, ΓÇ£Show Details from DropboxΓÇªΓÇ¥ has been added to the
+attachment-thumbnail by detecting that the link to Dropbox has not been
+initialized for this member. Once the Power-Up has been initialized and
+authenticated, we show a true thumbnail. 
+- For our Github Power-Up, the attachment-sections iframe managed by the
+Power-Up includes a prompt to authenticate to see additional information. 
+- We also trigger authentication after a user attempts to perform an action
+that requires it, such as when attaching a GitHub Issue to a card. 
+ When developing a Power-Up that requires authentication, try to offer as much
+functionality in a non-authenticated state as possible, and add non-intrusive
+links to authenticate the user to provide more functionality. 
+### Using t.authorize 
+For more information on t.authorize , see its documentation . 
+And checkout part three of our Power-Up tutorial to see a practical example of how to use t.authorize . 
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+
+############ https://developer.atlassian.com/cloud/trello/guides/power-ups/managing-apps/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Managing Apps 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### App Admin Portal 
+Apps are managed via Trello apps administration page 
+ . You can use this page to create new apps (including Power-Ups) and make changes to existing ones. 
+Visiting the page, you should see a list of all of the apps that you are able to admin: 
+Each app is listed under the Workspace to which it belongs. For Power-Ups, if a Power-Up has been added to a Workspace, it will be available for enablement on all of the boards that belong to that Workspace. 
+If this is your first time visiting the app admin portal, you'll be prompted to fill out the Joint Development Agreement. 
+### Creating a new app 
+To create a new app, start by clicking the "New" button in the top right of the admin portal. 
+You'll be given an empty form to fill out. 
+Below is information about each field and what it is used for. 
+ | 
+ | Field Name | Description 
+ | My app will/doesn't use Power-up capabilities | Whether or not your app will use Power-Up capabilities. 
+If you select "My app will use Power-Up capabilities", your app will be considered a Power-Up and you will also be prompted to fill in the Iframe Connector URL field. 
+If you select "My app doesn't use Power-Up capabilities", your app will not need an Iframe Connector URL, nor will it be able to use Power-Up capabilities. 
+Additionally, there are workspace restrictions on OAuth 2.0 clients for Power-Ups. See the "Scopes" section on this page for more information. 
+ | Name | The name of the app. 
+ | Workspace | The Trello Workspace that owns the app. For Power-Ups, the Power-Up will be available on the boards of the Workspace selected. 
+ | Email | An email where we can reach you about this app. 
+ | Support Email | We'll use this email when questions arise from users regarding your app or if we need to contact you regarding changes to the platform. 
+ | Author | The name to be displayed as the author in the directory and in authorization screens. 
+ | Iframe Connector URL | If your app will be a Power-Up (i.e., it will use Power-Up capabilities), this URL will be used for the iframe connector that will be loaded when the Power-Up is enabled. If your app is not using Power-Up capabilities, you will not have the option to fill in this field. 
+Once all the required fields are filled out, click "Create" to create your app! 
+### Basic Information 
+After creating the app, you'll be taken to the Basic Information form: 
+Below are details on each of the fields: 
+ | 
+ | Field Name | Description 
+ | Iframe Connector URL | The URL for the iframe connector that will be loaded when the Power-Up is enabled. This field only applies to Power-Ups. If your app is not a Power-Up, you will not be able to edit this field. 
+ | Icon | This will be the icon displayed to users when viewing your Power-Up in the directory, and when users authorize with this app key. We recommend avoiding transparent backgrounds in this icon to ensure its visibility in all places. 
+ | Categories | These categories will be used when searching and filtering Power-Ups in the directory. These categories only apply to Power-Ups. 
+ | Email | An email where we can reach you about this app. 
+ | Support Email | We'll use this email when questions arise from users regarding your app or if we need to contact you regarding changes to the platform. 
+ | Author | The name to be displayed as the author in the directory and in authorization screens. 
+### Capabilities 
+Power-Up capabilities are only available for Power-Ups. If your app is not a Power-Up, you won't see this tab. Use the toggles below to specify which capabilities you want to use in your Power-Up: 
+### What are capabilities? 
+If you're not familiar with all of the capabilities and what they do, we recommend you head over to the Power-Up capabilities documentation . 
+### Generating an API key 
+To access the Trello API, you must generate an API key. To register an API key to your app, go to your app, navigate to the Trello Auth tab and select the option Generate a new API Key . 
+For more information on how to perform API requests, please access our API Introduction page. 
+### Collaborators 
+By default, apps can only be managed by admins of the Workspace that owns the Power-Up. You can add Trello members from your Workspace to be collaborators on an app if you want to extend access to other Workspace members. 
+From the Collaborators section in the left navigation, you can search for Workspace members and add them as collaborators on the app. 
+Collaborators have all the same permissions on the app as a Workspace admin; they can update listings, turn off/on capabilities, etc. The only thing they can't do is remove Workspace admins. 
+### Listings 
+The Listings section allows you to manage how your app's name and description will be displayed in other languages. Head over to the Listings page for more information on how to manage listings. 
+### Privacy and Compliance 
+The Privacy and Compliance section contains a form with fields that are related to how your app manages personal data. See our documentation for more information. 
+### Distribution 
+For public Power-Ups, the Distribution section includes information regarding the Power-Up button. Head over to Power-Up Button for more information on how you can use the Power-Up button to distribute your Power-Up. 
+### Deleting an app 
+To delete an app, select "Delete app" from the top-left navigation. You'll be prompted to confirm that you want to delete the app. 
+### Public Power-Ups 
+Updating Public Power-Ups is the same as updating a custom Power-Up. You can follow the instructions above to change information regarding your Power-Up. 
+Keep in mind that any changes you make to the Power-Up will be reflected immediately to all of Trello's users. 
+### Deleting Public Power-Ups 
+You can't delete a Power-Up that has been made public via the dev portal. To delete a public Power-Up, please reach out to go.trello.com/dev-support 
+ . 
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+
+############ https://developer.atlassian.com/cloud/trello/guides/rest-api/limits/
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Limits 
+- 
+- 
+ Developer Documentation 
+ Resources 
+ News and Updates Get Support 
+ Sign in 
+ Developer Get Support Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+ Developer Sign in 
+ DOCUMENTATION Cloud 
+ Data Center 
+ Resources 
+ News and Updates Get support 
+ Sign in 
+### Trello 
+- Guides 
+- Reference 
+ REST API Power-Ups FAQ 
+- Changelog 
+### Trello 
+- Guides 
+- Reference 
+- Changelog 
+- Latest updates 
+- Power-Ups 
+- Your First Power-Up 
+- Building A Trello Power-Up: Part One 
+- Building A Trello Power-Up: Part Two 
+- Building A Trello Power-Up: Part Three 
+- Managing Apps 
+- Listings 
+- Updates 
+- Style Guide 
+- Public Power-Up Guidelines 
+- User Permissions In Power-Ups 
+- Power-Up Button 
+- Submit Your Power-Up 
+- Power-Up Launch Playbook 
+- Authentication 
+- Security 
+- Featured Power-Ups 
+- Topics 
+- Compliance 
+- Personal Data Storage and GDPR 
+- Developer Terms 
+- Trello Developer Terms 
+- Summary of Developer Terms Changes 
+- Community 
+- Community Projects 
+- Embedding 
+- Embedding Cards 
+- Embedding Boards 
+- Components 
+- Board Tile Component 
+- Card Component 
+- Trello's REST API 
+- API Introduction 
+- Nested Resources 
+- Object Definitions 
+- Limits 
+- Rate Limits 
+- Getting Started With Custom Fields 
+- Authorization 
+- OAuth 2.0 
+- OAuth 2.0 Client Configuration 
+- OAuth 2.0 Confidential Client Usage 
+- OAuth 2.0 For Existing Apps 
+- Webhooks 
+- Automating Exports 
+- Action Types 
+- Status Codes 
+- Client.js 
+- client.js Reference 
+- Getting Started With client.js Last updated Oct 1, 2026 
+### Limits 
+Trello limits the number of objects (cards, checklists, stickers, etc.) that can exist on a board or card. The limits for each type of object and whether they are limited at the card or board level are available via the cards and boards API resources. Below we'll dive into what the various limits are and how you should consider them when using Trello's API. 
+For information regarding API rate-limiting, you can read about Trello's API rate limits here 
+ . 
+### Your Limits May Vary 
+The responses below and the limits they contain are not meant to be the documented limits -
+they are only examples of the type and shape of response you can expect to receive back. 
+Limits may vary by boards and accounts. You should adjust your application to handle the responses and their values appropriately. 
+### Board-level Limits 
+There are a number of objects in Trello that are limited at the board level. For instance, to see the limits that exist on a board, we can make the following request: 
+1
+2 
+ curl https://api.trello.com/1/boards/552595baa7b650edb7a0f8ff/?fields=limits
+In the response we get back all of the limits that exist for the board: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51 
+ {
+ "id": "552595baa7b650edb7a0f8ff",
+ "limits": {
+ "boards": {
+ "totalMembersPerBoard": {
+ "status": "ok",
+ "disableAt": 1520,
+ "warnAt": 1440
+ }
+ },
+ "cards": {
+ "openPerBoard": {
+ "status": "ok",
+ "disableAt": 5000,
+ "warnAt": 4500
+ },
+ "totalPerBoard": {
+ "status": "ok",
+ "disableAt": 2000000,
+ "warnAt": 1800000
+ }
+ },
+ "checklists": {
+ "perBoard": {
+ "status": "ok",
+ "disableAt": 15200,
+ "warnAt": 14400
+ }
+ },
+ "labels": {
+ "perBoard": {
+ "status": "ok",
+ "disableAt": 950,
+ "warnAt": 900
+ }
+ },
+ "lists": {
+ "openPerBoard": {
+ "status": "ok",
+ "disableAt": 475,
+ "warnAt": 450
+ },
+ "totalPerBoard": {
+ "status": "ok",
+ "disableAt": 2850,
+ "warnAt": 2700
+ }
+ }
+ }
+}
+ΓÇïLooking at the cards values, we see the following limits enumerated: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19 
+ {
+ "id": "552595baa7b650edb7a0f8ff",
+ "limits": {
+ // ...
+ "cards": {
+ "openPerBoard": {
+ "status": "ok",
+ "disableAt": 5000,
+ "warnAt": 4500
+ },
+ "totalPerBoard": {
+ "status": "ok",
+ "disableAt": 2000000,
+ "warnAt": 1800000
+ }
+ }
+ }
+}
+The first set of values for the key openPerBoard indicates that Trello allows for 5000 open cards to exist per a board and that the Trello clients (web, mobile, desktop) will begin to warn users when they have 4500 cards open on a bard. The second object for key totalPerBoard means that Trello allows for 2000000 total cards (open or closed) to be on a board and that the clients will begin warning when there are 1800000. 
+The disableAt limit is the count at which the clients will no longer allow users to add objects of that kind.
+ΓÇï
+The status field indicates whether the board is in violation of the current limits. In this case, the board hasn't exceeded these limits. When a board has exceeded one of the types of limits, the status will change and a count field and value appear. 
+For example, if our board were to have more cards than allowed for by the disableAt the limits would be updated: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20 
+ {
+ "id": "552595baa7b650edb7a0f8ff",
+ "limits": {
+ // ...
+ "cards": {
+ "openPerBoard": {
+ "status": "disabled",
+ "disableAt": 5000,
+ "warnAt": 4500,
+ "count": 4755
+ },
+ "totalPerBoard": {
+ "status": "ok",
+ "disableAt": 2000000,
+ "warnAt": 1800000
+ }
+ }
+ }
+}
+Similarly, if the count is above the warnAt limit, the status will change to warn . 
+Additionally, there is a maximum number for each limit above which the API will return an error if more objects are attempted to be added. The status of objects that exceeded the limits prior to their creation is maxExceeded . 
+### Enforcing Disablement 
+Integrations should respect the disableAt limit and disallow users from continuing to add objects that exceed the limit. 
+### Card-level Limits 
+We can also see limits that are specific to cards by including limits as a value for the fields query parameter when making requests to card resources: 
+1
+2 
+ curl https://trello.com/1/boards/552595baa7b650edb7a0f8ff/cards/?fields=limits&limit=1
+The response we get back looks similar to the boards-level limits: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29 
+ [
+ {
+ "id": "5525975961f51a39c0679aa2",
+ "limits": {
+ "attachments": {
+ "perCard": {
+ "status": "ok",
+ "disableAt": 950,
+ "warnAt": 900
+ }
+ },
+ "checklists": {
+ "perCard": {
+ "status": "ok",
+ "disableAt": 475,
+ "warnAt": 450
+ }
+ },
+ "stickers": {
+ "perCard": {
+ "status": "ok",
+ "disableAt": 67,
+ "warnAt": 63
+ }
+ }
+ }
+ }
+]
+The card-level limits function the exact same as the board-level limits outlined above. 
+### Webhooks and Limits 
+ΓÇïIn addition to limiting the number of different types of objects that can exist on a board or card, we disallow creating new webhooks on objects that have exceeded their limits. 
+Attempting to create a webhook on an object that has exceeded its limits will result in the following error message: HTTP/1.1 500 Model exceeds limits 
+ΓÇï
+Webhooks that exist on models that have a limit status of maxExceeded will be deleted. 
+Rate this page: Unusable 
+ Poor 
+ Okay 
+ Good 
+ Excellent 
+ Changelog System status Privacy Notice at Collection Developer Terms Trademark Cookie preferences ┬⌐ 2026 Atlassian 
+

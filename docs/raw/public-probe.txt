@@ -1,0 +1,62 @@
+﻿==== Y1 public board no auth
+STATUS: HTTP/1.1 200 OK
+H: Content-Type: application/json; charset=utf-8
+H: Set-Cookie: dsc=14e348712ddf948b5cff5626b3747e4d61be2ea41b5a1688f28622a1f3488e44; Path=/; Expires=Wed, 04 Nov 2026 08:34:23 GMT; Secure; SameSite=None
+H: X-Cache: Miss from cloudfront
+BODY: {"id":"5abbe4b7ddc1b351ef961414","name":"Trello Platform Changelog","url":"https://trello.com/b/dQHqCohZ/trello-platform-changelog"}
+
+==== Y2 public member no auth
+STATUS: HTTP/1.1 200 OK
+H: Content-Type: application/json; charset=utf-8
+H: Set-Cookie: dsc=eb0ac7b044791dd704097bf74de45c99f67c98c4de8c7ee0f6f4e9b7eee59b87; Path=/; Expires=Wed, 04 Nov 2026 08:34:23 GMT; Secure; SameSite=None
+H: X-Cache: Miss from cloudfront
+BODY: {"id":"4e6a7fad05d98b02ba00845c","username":"trello","fullName":"Trello"}
+
+==== Y3 public board cards no auth
+STATUS: HTTP/1.1 200 OK
+H: Content-Type: application/json; charset=utf-8
+H: Set-Cookie: dsc=9eec2f0d7b13a910b92fa058d7bbb3927693c4b1ef872a45aacb459b28189d41; Path=/; Expires=Wed, 04 Nov 2026 08:34:24 GMT; Secure; SameSite=None
+H: X-Cache: Miss from cloudfront
+BODY: [{"id":"6388c3e4a1dffd04e6ad2fb1","agent":null,"badges":{"fogbugz":"","checkItems":0,"checkItemsChecked":0,"checkItemsEarliestDue":null,"comments":0,"attachments":0,"description":false,"due":null,"dueComplete":false,"sta...[cut]
+
+==== Y4 POST card no auth
+STATUS: HTTP/1.1 404 Not Found
+H: Content-Type: text/plain; charset=utf-8
+H: X-Cache: Error from cloudfront
+BODY: Cannot POST /1/boards/5abbe4b7ddc1b351ef961414/cards
+
+==== Y5 me/boards bad auth
+STATUS: HTTP/1.1 401 Unauthorized
+H: Content-Type: text/plain; charset=utf-8
+H: Set-Cookie: dsc=340781752a5a95d08ffb631017d766edd08853215357519a513054a074bf50e8; Path=/; Expires=Wed, 04 Nov 2026 08:34:25 GMT; Secure; SameSite=None
+H: X-Cache: Error from cloudfront
+BODY: invalid key
+
+==== Y6 OPTIONS preflight
+STATUS: HTTP/1.1 200 OK
+H: Content-Type: text/plain
+H: Set-Cookie: dsc=8b02faba6cbbe9b6e91b825ed8b0cecb42178cf2bcec49901cbe7808325a820a; Path=/; Expires=Wed, 04 Nov 2026 08:34:26 GMT; Secure; SameSite=None
+H: Allow: GET, HEAD
+H: X-Cache: Miss from cloudfront
+BODY: GET, HEAD
+
+==== Y7 trello.com/1 host variant
+STATUS: HTTP/1.1 400 Bad Request
+H: Content-Type: text/plain; charset=utf-8
+H: Set-Cookie: dsc=59b6a2456bbfa8d19adfb8b2abf7ce0b6f66abaee040544a69486cfbe0742537; Path=/; Expires=Wed, 04 Nov 2026 08:34:26 GMT; Secure; SameSite=None
+H: X-Cache: Error from cloudfront
+BODY: invalid token
+
+==== Y8 swagger path
+STATUS: HTTP/1.1 404 Not Found
+H: Content-Type: text/plain; charset=utf-8
+H: Set-Cookie: dsc=4ff9a77b578513fd5e7caf9dfc51db0eefa5eb28768dcc2839248f3dfd143cb5; Path=/; Expires=Wed, 04 Nov 2026 08:34:27 GMT; Secure; SameSite=None
+H: X-Cache: Error from cloudfront
+BODY: Cannot GET /1/swagger.json
+
+==== Y9 token exchange no auth
+STATUS: HTTP/1.1 400 Bad Request
+H: Content-Type: text/plain; charset=utf-8
+H: X-Cache: Error from cloudfront
+BODY: Error parsing body
+

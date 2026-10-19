@@ -1,0 +1,28 @@
+- generic [ref=f27e82]:
+  - main [ref=f27e83]:
+    - generic [ref=f27e84]:
+      - img "Trello" [ref=f27e85]
+      - heading "We've emailed you a code" [level=1] [ref=f27e91]
+    - generic [ref=f27e92]:
+      - generic [ref=f27e93]: "To complete your account setup, enter the code we've sent to:"
+      - paragraph [ref=f27e94]: trello-auth-probe-918273@invalid-domain-xyz.test
+    - generic [ref=f27e95]:
+      - group "Verification code" [ref=f27e98]:
+        - generic [ref=f27e100]:
+          - textbox "Please enter OTP character 1" [active] [ref=f27e102]
+          - textbox "Please enter OTP character 2" [ref=f27e104]
+          - textbox "Please enter OTP character 3" [ref=f27e106]
+          - textbox "Please enter OTP character 4" [ref=f27e108]
+          - textbox "Please enter OTP character 5" [ref=f27e110]
+          - textbox "Please enter OTP character 6" [ref=f27e112]
+      - button "Verify" [ref=f27e113] [cursor=pointer]
+    - button "Didn't receive an email? Resend email" [ref=f27e116] [cursor=pointer]
+  - contentinfo [ref=f27e118]:
+    - generic [ref=f27e119]:
+      - img "Atlassian" [ref=f27e120]
+      - generic [ref=f27e124]:
+        - link "One account , (opens new window)" [ref=f27e125] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/what-is-an-atlassian-account/
+          - text: One account
+          - generic [ref=f27e129]: ", (opens new window)"
+        - text: for Trello, Jira, Confluence and more.

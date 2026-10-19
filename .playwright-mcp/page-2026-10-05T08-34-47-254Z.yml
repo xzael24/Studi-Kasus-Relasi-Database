@@ -1,0 +1,34 @@
+- generic [ref=f41e12]:
+  - main [ref=f41e13]:
+    - generic [ref=f41e14]:
+      - img "Trello" [ref=f41e15]
+      - heading "Can't log in?" [level=1] [ref=f41e21]
+    - generic [ref=f41e22]:
+      - generic [ref=f41e23]:
+        - generic [ref=f41e24]: We'll send a recovery link to
+        - textbox "We'll send a recovery link to" [active] [ref=f41e26]:
+          - /placeholder: Enter email
+      - button "Send recovery link" [ref=f41e27] [cursor=pointer]
+    - link "Return to log in" [ref=f41e31] [cursor=pointer]:
+      - /url: /login?application=trello
+  - contentinfo [ref=f41e32]:
+    - generic [ref=f41e33]:
+      - img "Atlassian" [ref=f41e34]
+      - generic [ref=f41e38]:
+        - link "One account , (opens new window)" [ref=f41e39] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/what-is-an-atlassian-account/
+          - text: One account
+          - generic [ref=f41e43]: ", (opens new window)"
+        - text: for Trello, Jira, Confluence and more.
+    - list [ref=f41e44]:
+      - listitem [ref=f41e45]:
+        - link "Login help , (opens new window)" [ref=f41e46] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/troubleshoot-login-issues-with-your-atlassian-account/
+          - text: Login help
+          - generic [ref=f41e50]: ", (opens new window)"
+      - text: •
+      - listitem [ref=f41e51]:
+        - link "Contact Support , (opens new window)" [ref=f41e52] [cursor=pointer]:
+          - /url: https://support.atlassian.com/
+          - text: Contact Support
+          - generic [ref=f41e56]: ", (opens new window)"

@@ -1,0 +1,174 @@
+﻿==== P1 query only
+HTTP/1.1 401 Unauthorized
+Content-Type: text/html
+BODY: HTTP/1.1 401 Unauthorized
+Content-Type: text/html
+Content-Length: 19064
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-Xss-Protection: 1; mode=block
+Atl-Traceid: 78dd0138d3074d2992052a0884587252
+Atl-Request-Id: 78dd0138-d307-4d29-9205-2a0884587252
+Strict-Transport-Security: max-age=63072000; preload
+Report-To: {"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "end ...[cut]
+
+==== P2 cookie only (fake trello_session)
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=f85e2d4e5c01475569c11b0c2545360b4b39b788613f837b223f24fe1cc87e95; Path=/; Expires=Wed, 04 Nov 2026 08:27:27 GMT; Secure; SameSite=None
+X-Rate-Limit-Asap-Interval-Ms: 10000
+X-Rate-Limit-Asap-Max: 1000000
+X-Rate-Limit-Asap-Remaining: 993569
+BODY: HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:27 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reval ...[cut]
+
+==== P3 header OAuth 1.0 style
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=e38c3b44d5b3299f12196881a9075ed0279bdc0e308745f47243c643afa4905d; Path=/; Expires=Wed, 04 Nov 2026 08:27:27 GMT; Secure; SameSite=None
+X-Rate-Limit-Unauthed-Ip-Interval-Ms: 10000
+X-Rate-Limit-Unauthed-Ip-Max: 200
+X-Rate-Limit-Unauthed-Ip-Remaining: 199
+BODY: HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:27 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reval ...[cut]
+
+==== P4 only key, no token
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=9a6492615f413ec5163bd7808993afcda8c877a2153d50e239689b0340ac8faf; Path=/; Expires=Wed, 04 Nov 2026 08:27:28 GMT; Secure; SameSite=None
+X-Rate-Limit-Asap-Interval-Ms: 10000
+X-Rate-Limit-Asap-Max: 1000000
+X-Rate-Limit-Asap-Remaining: 992890
+BODY: HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:28 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reval ...[cut]
+
+==== P5 key only
+HTTP/1.1 401 Unauthorized
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=a813345bde9b5c02f7a500c2996380494d6b2fa932bc6cecec0537951ec22e14; Path=/; Expires=Wed, 04 Nov 2026 08:27:28 GMT; Secure; SameSite=None
+X-Rate-Limit-Api-Key-Interval-Ms: 10000
+X-Rate-Limit-Api-Key-Max: 300
+X-Rate-Limit-Api-Key-Remaining: 299
+X-Rate-Limit-Db-Query-Time-Interval-Ms: 600000
+X-Rate-Limit-Db-Query-Time-Max: 7200000
+X-Rate-Limit-Db-Query-Time-Remaining: 7199990
+X-Rate-Limit-Api-Key-No-Token-Interval-Ms: 10000
+X-Rate-Limit-Api-Key-No-Token-Max: 100
+X-Rate-Limit-Api-Key-No-Token-Remaining: 99
+BODY: HTTP/1.1 401 Unauthorized
+Content-Type: text/plain; charset=utf-8
+Content-Length: 11
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:28 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reva ...[cut]
+
+==== P6 token only
+HTTP/1.1 401 Unauthorized
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=4502c537806287760f5ea1584d374c5afa9a55ef51b8adc920900621e1d8e2c2; Path=/; Expires=Wed, 04 Nov 2026 08:27:29 GMT; Secure; SameSite=None
+BODY: HTTP/1.1 401 Unauthorized
+Content-Type: text/plain; charset=utf-8
+Content-Length: 11
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:29 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reva ...[cut]
+
+==== P7 public-ish read no auth
+HTTP/1.1 404 Not Found
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=3ddffd56e2e2dc72940e785e1f59b430d447cc7100c0729be6ba65026254c8c0; Path=/; Expires=Wed, 04 Nov 2026 08:27:29 GMT; Secure; SameSite=None
+X-Rate-Limit-Asap-Interval-Ms: 10000
+X-Rate-Limit-Asap-Max: 1000000
+X-Rate-Limit-Asap-Remaining: 991731
+BODY: HTTP/1.1 404 Not Found
+Content-Type: text/plain; charset=utf-8
+Content-Length: 15
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:29 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalid ...[cut]
+
+==== P8 DELETE token route (GET)
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: dsc=7aa2e478fb83c7db2bcff88596b4db93d830d899031779097752ff186ae79320; Path=/; Expires=Wed, 04 Nov 2026 08:27:29 GMT; Secure; SameSite=None
+X-Rate-Limit-Asap-Interval-Ms: 10000
+X-Rate-Limit-Asap-Max: 1000000
+X-Rate-Limit-Asap-Remaining: 991286
+BODY: HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:29 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy-reval ...[cut]
+
+==== P9 GET batch
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Set-Cookie: dsc=b1b01e166315e4bdfbbd122725987f45bee2acb40e2454e37f1022795d48d9b0; Path=/; Expires=Wed, 04 Nov 2026 08:27:30 GMT; Secure; SameSite=None
+BODY: HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Content-Length: 52
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:27:30 GMT
+Referrer-Policy: strict-origin-when-cross-origin
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+Surrogate-Control: no-store
+Cache-Control: no-store, no-cache, must-revalidate, proxy ...[cut]
+

@@ -1,0 +1,24 @@
+﻿HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1407
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 08:45:03 GMT
+Cache-Control: no-cache
+Access-Control-Allow-Origin: *
+X-Frame-Options: DENY
+Server: AtlassianEdge
+X-Content-Type-Options: nosniff
+X-Xss-Protection: 1; mode=block
+Atl-Traceid: 1a9987b26aec4b0fa0f7b1158bf077ab
+Atl-Request-Id: 1a9987b2-6aec-4b0f-a0f7-b1158bf077ab
+Strict-Transport-Security: max-age=63072000; preload
+Report-To: {"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}
+Nel: {"failure_fraction": 0.01, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}
+X-Cache: Miss from cloudfront
+Via: 1.1 e993f800600cda32fe1f8ad725419100.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: CGK51-P4
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: ItATQ2-omS6Awz4t_FTr4rzoDGh9b4DY-YzU3s-lgMYz4UpKhmkZNA==
+Server-Timing: cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=194,atl-edge;dur=178,atl-edge-internal;dur=3,atl-edge-upstream;dur=175,atl-edge-pop;desc="aws-ap-southeast-1",cdn-cache-miss,cdn-pop;desc="CGK51-P4",cdn-rid;desc="ItATQ2-omS6Awz4t_FTr4rzoDGh9b4DY-YzU3s-lgMYz4UpKhmkZNA==",cdn-downstream-fbl;dur=198
+
+{"authorization_endpoint":"https://auth.atlassian.com/authorize","claims_supported":["aud","auth_time","created_at","email","email_verified","exp","family_name","given_name","iat","identities","iss","name","nickname","phone_number","picture","sub"],"code_challenge_methods_supported":["S256"],"device_authorization_endpoint":"https://auth.atlassian.com/oauth/device/code","id_token_signing_alg_values_supported":["HS256","RS256"],"issuer":"https://auth.atlassian.com","jwks_uri":"https://auth.atlassian.com/.well-known/jwks.json","mfa_challenge_endpoint":"https://auth.atlassian.com/mfa/challenge","registration_endpoint":"https://auth.atlassian.com/oidc/register","request_parameter_supported":false,"request_uri_parameter_supported":false,"response_modes_supported":["query","fragment","form_post"],"response_types_supported":["code","token","id_token","code token","code id_token","token id_token","code token id_token"],"revocation_endpoint":"https://auth.atlassian.com/oauth/revoke","scopes_supported":["openid","profile","offline_access","name","given_name","family_name","nickname","email","email_verified","picture","created_at","identities","phone","address"],"subject_types_supported":["public"],"token_endpoint":"https://auth.atlassian.com/oauth/token","token_endpoint_auth_methods_supported":["client_secret_basic","client_secret_post"],"userinfo_endpoint":"https://auth.atlassian.com/userinfo"}

@@ -1,0 +1,141 @@
+﻿############ https://support.atlassian.com/trello/docs/enabling-two-factor-authentication-for-your-trello-account
+- Atlassian Support 
+- Trello 
+- Resources 
+- Account settings, billing, and security 
+- Update your profile, account, and settings 
+### Enable two-factor authentication for your Trello account 
+Two-Factor Authentication (also known as 2FA), allows you to add another layer of verification to the login process, requiring a second piece of information in addition to your email address and password in order to log in to Trello. The purpose of 2FA is to make it more difficult for an attacker to gain control of your account by requiring a code that is only accessible via a second authentication device.┬á 
+You can add 2FA through your Atlassian Account.┬áConfigure 2FA following the steps here:┬á Manage two-step verification for your Atlassian Account 
+┬á 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Update your profile, account, and settings 
+- Show more 
+- Does Trello offer support in other languages? 
+- Enable suggested actions 
+- 
+Enable two-factor authentication for your Trello account 
+- How to transfer board memberships to a new account 
+- Merging and splitting multiple Trello accounts 
+- Show more 
+ Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/trello/docs/dormant-trello-account-policy
+- Atlassian Support 
+- Trello 
+- Resources 
+- Account settings, billing, and security 
+- Privacy, security, and legal 
+### Dormant Trello account policy 
+### Dormant Trello account policy 
+A Trello account holds your Trello content, such as your memberships and therefore your access to the Workspaces and boards that youΓÇÖre a part of. 
+A dormant Trello account is an account that has not had any activity for 2 years or more, and Atlassian reserves the right to delete these accounts if they havenΓÇÖt been used for that long. 
+### What is considered activity 
+Trello will consider your account as being active if itΓÇÖs had any kind of activity within the last 2 years. Activity is any interaction you may have had with the Trello app, regardless of the platform. It includes, but is not limited to: 
+- 
+Logging in to Trello 
+- 
+Updating your profile and settings 
+- 
+Navigating the app 
+- 
+Accessing boards and Workspaces 
+- 
+Inviting users 
+- 
+Updating board or Workspace settings 
+- 
+Creating, editing or deleting cards (including via REST API) 
+### What is the deletion process 
+If your Trello account has been inactive for over two years, you may get an email from us saying that your account is scheduled for deletion. The deletion will happen 60 days after this email is sent. YouΓÇÖll also receive a second at least 3 days before deletion. 
+During these 60 days, you can log in to your Trello account to keep it active. If you log in, your account will not be deleted. 
+If you donΓÇÖt login to your account during those 60 days, your account will be deleted. Check what content is deleted or retained when your Trello account is deleted 
+### Atlassian account disclaimer 
+Your Trello account is governed by your Atlassian account, which holds your user profile data, authentication settings, and access to other Atlassian Cloud apps and instances. This Dormant Trello account policy only affects your Trello account, meaning that your Atlassian account, as well as your access to any other Atlassian apps you may use it for will remain unaffected. 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Privacy, security, and legal 
+- Cloud Terms of Service - FAQs 
+- Cloud Terms of Service - Summary of Changes 
+- 
+Dormant Trello account policy 
+- Protect your account from phishing 
+- Public data vs. private data in Trello 
+- Show more 
+ On this page What is considered activity What is the deletion process Atlassian account disclaimer Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/trello/docs/what-is-a-deactivated-user
+- Atlassian Support 
+- Trello 
+- Resources 
+- Manage a Workspace 
+- Manage Workspace members and boards 
+### What is a deactivated user? 
+A deactivated user is someone who has either been deactivated in the Trello Workspace, or whose entire Atlassian account is deactivated. 
+Users who have been deactivated in a Trello Workspace can still access non-Workspace┬ácontent that their account had access to (such as content on other┬áWorkspaces, or their own private boards). 
+Users whose Atlassian account is deactivated canΓÇÖt log in, so they canΓÇÖt access Trello or any other Atlassian apps. 
+Workspace admins can deactivate any user in a paid Trello Workspace. Deactivated users do not consume a license in a Standard or Premium Workspace. 
+Deactivating a user leaves them assigned to cards and boards, while removing a user from the Workspace┬áwill remove them from all boards and cards completely. 
+### Deactivate a user in a Workspace 
+To deactivate a┬áWorkspace┬ámember: 
+- 
+Open the┬áWorkspace┬áMembers page 
+- 
+Find the user you want to deactivate and select Remove 
+- 
+In the resulting menu, select Deactivate 
+### Reactivate a user 
+Reactivated users will regain access to┬áWorkspace-visible boards and any boards in the┬áWorkspace┬áof which they're a member.┬áWorkspace┬áadmins can reactivate a user from the Workspace members section by selecting Reactivate 
+If the Reactivate button is missing, it likely means the userΓÇÖs Atlassian account is managed and was deactivated by their organization admin. 
+Trello Workspace admins canΓÇÖt reactivate a userΓÇÖs Atlassian account. That user will need to contact their organization admin. More about reactivating a managed account 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Manage Workspace members and boards 
+- Show more 
+- Recover a Workspace or board when the admin is gone 
+- Remove a collaborator from a free Workspace 
+- Remove a member from a Workspace 
+- 
+What is a deactivated user? 
+- What is a Workspace guest? On this page Deactivate a user in a Workspace Reactivate a user Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/trello/docs/recovering-your-trello-account
+- Atlassian Support 
+- Trello 
+- Resources 
+- Troubleshooting 
+- Can't log in or access Trello 
+### Recovering your Trello account 
+You can reset your password by going to┬á┬á https://id.atlassian.com/login/resetpassword . If your email address is not associated with an existing Trello account, we'll let you know after you submit the form. 
+Using the above link should take care of most cases where you can't access your account. However, sometimes things can get a bit complicated. We'll address each scenario individually. 
+### Verifying your account 
+We have only two ways to verify that you are the owner of your account: 
+- 
+You know the email (or username) and password of your account and can log in at┬á trello.com . 
+- 
+You own the email address associated with your account and can recover your password┬áat┬á https://id.atlassian.com/login/resetpassword . 
+ NOTE: If your account was created via Google log-in, you will also be able to recover your Trello account by logging in via your Google account. 
+Because these are the only two methods to verify your account,┬á┬á it is critically important that you keep your email address up to date . If you change jobs, graduate from college, etc. and no longer have access to the original email address you used to access Trello, you may not be able to recover your account if you forget your password. 
+### You are not receiving password reset emails 
+If you're using the password reset form, but not receiving the emails, please see┬á┬á Not receiving confirmation emails or password reset emails . 
+### You don't use that email anymore 
+You may no longer have access to the email address associated with your account. This happens sometimes when you change jobs and aren't using your work email anymore. This can also happen if you delete your email account. 
+For security reasons, we are not able to change the email address on your account (see below). Your best bet is to contact your former employer directly and ask if they can help you reclaim your Trello account by temporarily re-opening your old email account. 
+### Why can't you change my email address? 
+For security reasons, we cannot change the email address associated with your account.┬áIf we were allowed to change your email address, this would expose your account to "social hacking." Social hacking is when someone pretending to be you sends us an email asking us to change the email address associated with your account, thus giving the hacker control of your account. 
+For example, let's say your name is Robert Jones and your work email is robert.jones@example.com. Someone could create a fake email address, e.g. rjones@example.com, and email us, pretending to be you. They might say how they changed jobs and no longer use robert.jones@example.com and could we please change the email for them. We cannot. 
+The Trello team cannot change the email address associated with your account. 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Can't log in or access Trello 
+- Show more 
+- Losing connection to Trello servers 
+- Not receiving confirmation emails or password reset emails 
+- 
+Recovering your Trello account 
+- Troubleshooting a slow board 
+- Troubleshooting browser issues with Trello 
+- Show more 
+ On this page Verifying your account You are not receiving password reset emails You don't use that email anymore Why can't you change my email address? Community Questions, discussions, and articles 
+

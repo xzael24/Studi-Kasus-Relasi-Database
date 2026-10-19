@@ -1,0 +1,39 @@
+- generic [ref=f39e12]:
+  - main [ref=f39e13]:
+    - generic [ref=f39e14]:
+      - img "Trello" [ref=f39e15]
+      - heading "Can't log in?" [level=1] [ref=f39e21]
+    - generic [ref=f39e57]:
+      - paragraph [ref=f39e60]: We sent a recovery link to you at
+      - paragraph [ref=f39e61]: probe-nonexistent-user-918273@invalid-domain-xyz.test
+    - paragraph [ref=f39e62]:
+      - paragraph [ref=f39e63]:
+        - text: If you haven't received the email, check your spam folder or
+        - link "sign up" [ref=f39e64] [cursor=pointer]:
+          - /url: /signup?application=trello&email=probe-nonexistent-user-918273%40invalid-domain-xyz.test
+    - generic [ref=f39e30]:
+      - link "Return to log in" [ref=f39e31] [cursor=pointer]:
+        - /url: /login?application=trello&email=probe-nonexistent-user-918273%40invalid-domain-xyz.test
+      - generic: "|"
+      - button "Resend recovery link" [ref=f39e65] [cursor=pointer]
+  - contentinfo [ref=f39e32]:
+    - generic [ref=f39e33]:
+      - img "Atlassian" [ref=f39e34]
+      - generic [ref=f39e38]:
+        - link "One account , (opens new window)" [ref=f39e39] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/what-is-an-atlassian-account/
+          - text: One account
+          - generic [ref=f39e43]: ", (opens new window)"
+        - text: for Trello, Jira, Confluence and more.
+    - list [ref=f39e44]:
+      - listitem [ref=f39e45]:
+        - link "Login help , (opens new window)" [ref=f39e46] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/troubleshoot-login-issues-with-your-atlassian-account/
+          - text: Login help
+          - generic [ref=f39e50]: ", (opens new window)"
+      - text: •
+      - listitem [ref=f39e51]:
+        - link "Contact Support , (opens new window)" [ref=f39e52] [cursor=pointer]:
+          - /url: https://support.atlassian.com/
+          - text: Contact Support
+          - generic [ref=f39e56]: ", (opens new window)"

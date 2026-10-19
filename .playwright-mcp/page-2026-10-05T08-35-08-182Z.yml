@@ -1,0 +1,27 @@
+- generic [ref=f43e12]:
+  - main [ref=f43e13]:
+    - generic [ref=f43e14]:
+      - img "Atlassian" [ref=f43e15]
+      - heading "Log out of your Atlassian account" [level=1] [ref=f43e20]
+    - button "Log out" [ref=f43e23] [cursor=pointer]
+    - link "Log in to another account" [ref=f43e26] [cursor=pointer]:
+      - /url: /login/select-account
+  - contentinfo [ref=f43e27]:
+    - generic [ref=f43e28]:
+      - img "Atlassian" [ref=f43e29]
+      - generic [ref=f43e33]:
+        - link "One account , (opens new window)" [ref=f43e34] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/what-is-an-atlassian-account/
+          - text: One account
+          - generic [ref=f43e38]: ", (opens new window)"
+        - text: for Jira, Confluence, Trello and more.
+    - list [ref=f43e39]:
+      - listitem [ref=f43e40]:
+        - link "Atlassian Privacy Policy , (opens new window)" [ref=f43e41] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/privacy-policy
+          - text: Privacy Policy
+      - text: •
+      - listitem [ref=f43e45]:
+        - link "Atlassian User Notice , (opens new window)" [ref=f43e46] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/user-notice
+          - text: User Notice

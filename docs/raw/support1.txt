@@ -1,0 +1,168 @@
+﻿############ https://support.atlassian.com/atlassian-account/docs/login-issues-related-to-a-locked-atlassian-account
+- Atlassian Support 
+- Atlassian accounts Resources 
+- Get access to your Atlassian cloud products 
+- Troubleshoot login issues with your Atlassian account 
+### Login issues related to a locked Atlassian account 
+This document describes why your Atlassian account may have been locked and what you can do to unlock it. 
+### YouΓÇÖve been locked out of your account after you failed to log in multiple times 
+To help protect your Atlassian account, we'll lock your account after multiple failed login attempts in a short period of time. 
+After youΓÇÖve made a number of login attempts, a CAPTCHA form will be displayed which youΓÇÖll need to complete before attempting to log in again. If youΓÇÖre still unable to log in, your account will be temporarily locked and youΓÇÖll need to wait a few minutes before attempting to log in again. 
+### YouΓÇÖve been locked out of your account and asked to reset your password 
+If we suspect someone has attempted to log in to your Atlassian account or that your password has been compromised, weΓÇÖll ask you to reset your password before you can log in again. Your organization admin may also request you reset your password before logging in to your account. 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Troubleshoot login issues with your Atlassian account 
+- Show more 
+- Login issues related to two-step verification 
+- Login issues related to single sign-on (SSO) 
+- Login issues related to an incorrect email address error 
+- 
+Login issues related to a locked Atlassian account 
+- Login issues related to identity verification On this page YouΓÇÖve been locked out of your account after you failed to log in multiple times YouΓÇÖve been locked out of your account and asked to reset your password Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/atlassian-account/docs/access-your-atlassian-account-with-a-passkey
+- Atlassian Support 
+- Atlassian accounts Resources 
+- Keep your Atlassian account secure 
+### Access your Atlassian account with a passkey 
+Passkeys let you sign in to your Atlassian account without requiring a password or using two-factor authentication. Instead, you use a passkey thatΓÇÖs securely stored on your device, such as your phone, computer or a physical security key, such as a Yubikey. Passkeys use your deviceΓÇÖs built-in security ΓÇö like fingerprint, face recognition, or a device PIN ΓÇö to confirm itΓÇÖs really you. 
+### Enable passkey authentication for your account 
+Passkey authentication is only available for non-managed accounts. If your account is managed by an organization, you will not see the option to enable passkeys. 
+To enable passkey authentication for your Atlassian account: 
+- 
+Log in to your Atlassian account at┬á https://id.atlassian.com/manage-profile/security ┬áand, in the Passkeys section, select Create and manage passkeys . 
+- 
+Select Register key to register a new passkey. 
+- 
+Name the key, then select Register and choose where to save your passkey. 
+You can add multiple passkeys to your account. You will be able to authenticate with any of these passkeys. 
+### Log in with a passkey 
+To log in with a passkey: 
+- 
+Go to id.atlassian.com/login . 
+- 
+Select Passkey . 
+- 
+Select a saved passkey for atlassian.com and follow the prompts. 
+### Manage passkeys for your account 
+You can manage the passkeys you use to sign in to your Atlassian account. This includes renaming them, or deleting passkeys you no longer use. 
+- 
+Log in to your Atlassian account at┬á https://id.atlassian.com/manage-profile/security ┬áand, in the Passkeys section, select Create and manage passkeys . 
+- 
+Select the passkey name to rename it, or select Delete to delete a passkey. 
+If you delete all registered passkeys, you will still be able to use your password or another available method to sign in. 
+┬á 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Keep your Atlassian account secure 
+- Manage API tokens for your Atlassian account 
+- Manage recently used devices for your Atlassian account 
+- Manage two-step verification for your Atlassian account 
+- Protect your Atlassian account 
+- 
+Access your Atlassian account with a passkey On this page Enable passkey authentication for your account Log in with a passkey Manage passkeys for your account Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/atlassian-account/docs/manage-recently-used-devices-for-your-atlassian-account
+- Atlassian Support 
+- Atlassian accounts Resources 
+- Keep your Atlassian account secure 
+### Manage recently used devices for your Atlassian account 
+The recent devices list in your Atlassian account profile lets you view and manage the devices that are currently logged in to your Atlassian cloud app s and services. 
+If one of your devices has been lost or stolen, or you notice suspicious activity, view your recent devices list to log out of any or all of your devices. 
+### View your recent devices 
+- 
+Go to your Atlassian account security settings at┬á id.atlassian.com/manage-profile/security . 
+- 
+Select┬á View and manage recent devices . 
+The recent devices list shows the devices that are currently logged in to your Atlassian account. 
+When logging in from a browser, youΓÇÖll be able to view: 
+- 
+the device you used to log in (including the operating system and browser version) 
+- 
+the IP address of your device 
+- 
+when your device was last logged in 
+When logging in using a mobile app, youΓÇÖll be able to view: 
+- 
+the device you used to log in (including the operating system and mobile app used) 
+- 
+the IP address of your device 
+- 
+when your mobile app was last used on your device 
+ Some things to remember when viewing your recent devices: 
+- 
+If you've logged in from multiple browsers on the same device, you'll see a listing for each of those. 
+- 
+If you've logged into multiple Atlassian apps from the same device (for example, the Jira mobile app), you'll see a listing for each of those. 
+- 
+If youΓÇÖve logged in using a mobile app, youΓÇÖll see a listing for a web login as well as your mobile login because mobile logins are completed through a browser. 
+- 
+Non-interactive logins (for example, calls using┬á API tokens ) will not be displayed in your recent devices list. 
+### Manage your recent devices 
+If you need to, you can log out of one or all of your devices. 
+ Log out of one device 
+- 
+Click┬á Log out ┬áfor the individual device that you want to log out of. 
+ Log out of all devices 
+- 
+Click┬á Log out of all devices ┬áat the bottom of your recent devices list. This will log you out of all devices apart from the one that you're currently using. 
+- 
+If you'd also like to log out of the device that you're on, choose┬á Log out ┬áfrom the top right-hand corner of your screen. 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Keep your Atlassian account secure 
+- Manage API tokens for your Atlassian account 
+- 
+Manage recently used devices for your Atlassian account 
+- Manage two-step verification for your Atlassian account 
+- Protect your Atlassian account 
+- Access your Atlassian account with a passkey On this page View your recent devices Manage your recent devices Community Questions, discussions, and articles 
+
+############ https://support.atlassian.com/security-and-access-policies/docs/update-idle-session-duration
+- Atlassian Support 
+- Security and access policies Resources 
+- Configure settings for secure user login 
+### Update idle session duration 
+ | 
+ Who can do this? 
+ Role: Organization admin 
+ Atlassian Cloud: All plans
+ Atlassian Government Cloud: Available, with preset conditions 
+When you set idle session duration in an authentication policy, members of that policy are automatically logged out when they havenΓÇÖt interacted with the app for the specified period of time. A session is considered idle when a user takes no action, including passive interactions such as an automatic page refresh. Setting idle session duration helps you enforce security requirements by ensuring inactive sessions donΓÇÖt remain open. 
+ Understand authentication policies 
+### Before you begin 
+- 
+To update idle session duration, you need to verify at least one domain. When you verify a domain, all the Atlassian accounts that use email addresses from that domain become┬ámanaged┬áby your organization. Verify a domain to manage accounts 
+- 
+When you set idle session duration in an authentication policy, it only applies to your managed accounts. External user security settings are managed separately. Understand external user security 
+- 
+Idle session duration doesn't apply to mobile app sessions, but you can set session expiration. Set mobile app session expiration 
+- 
+ThereΓÇÖs also an option to set session expiration in an authentication policy. If configured, users may be logged out when reaching that limit, regardless of activity or idle timeout. Set session expiration 
+### Set idle session duration in an authentication policy 
+The default setting for idle session duration is 30 days. In Atlassian Government Cloud, it is 24 hours. 
+To update idle session duration: 
+- 
+ Go to Atlassian Administration . Select your organization if you have more than one. 
+- 
+ Select Security , then User security , then Authentication policies . 
+- 
+Select Edit for the policy you want to modify. 
+- 
+On the Settings page, select length of time for Idle session duration. 
+When you save changes to the session duration, users don't get logged out of their accounts.┬áThe new idle session duration will apply the next time a user logs in. 
+If you donΓÇÖt have an Atlassian Guard Standard subscription, you can only set the idle session duration in a single authentication policy that applies to all users. To create and use multiple authentication policies ΓÇö for example, to set different idle session durations for different groups ΓÇö you need an Atlassian Guard Standard subscription. 
+┬á 
+Was this helpful? Yes No It wasn't accurate It wasn't clear It wasn't relevant Provide feedback about this article 
+### Still need help? The Atlassian Community is here for you. Ask the Community 
+- Configure settings for secure user login 
+- Manage your password policy 
+- Enforce two-step verification 
+- 
+Update idle session duration 
+- Configure your organizationΓÇÖs login page 
+- Set mobile app session expiration 
+- Show more 
+ On this page Before you begin Set idle session duration in an authentication policy Community Questions, discussions, and articles 
+

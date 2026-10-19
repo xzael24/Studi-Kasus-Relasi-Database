@@ -1,0 +1,99 @@
+﻿==== X0 no auth
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Asap-Interval-Ms: 10000
+RL: X-Rate-Limit-Asap-Max: 1000000
+RL: X-Rate-Limit-Asap-Remaining: 998855
+BODY: invalid token
+
+==== X1 bad key+token
+STATUS: HTTP/1.1 401 Unauthorized
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Db-Query-Time-Interval-Ms: 600000
+RL: X-Rate-Limit-Db-Query-Time-Max: 7200000
+RL: X-Rate-Limit-Db-Query-Time-Remaining: 7199990
+RL: X-Rate-Limit-Api-Token-Interval-Ms: 10000
+RL: X-Rate-Limit-Api-Token-Max: 100
+RL: X-Rate-Limit-Api-Token-Remaining: 99
+RL: X-Rate-Limit-Api-Key-Interval-Ms: 10000
+RL: X-Rate-Limit-Api-Key-Max: 300
+RL: X-Rate-Limit-Api-Key-Remaining: 299
+BODY: invalid key
+
+==== X2 bad query + Bearer header
+STATUS: HTTP/1.1 401 Unauthorized
+CT: Content-Type: text/html
+BODY: <!DOCTYPE html>
+<html>
+   <head>
+       <title>The credentials supplied were not valid for this endpoint</title>
+       <meta name="flags" content="UAEX">
+       <meta name="details" content="ext_authz_denied">
+   </head>
+   <body style="background:#F4F5F7; padding:0; margin:0;">
+      <div style="p...[cut]
+
+==== X3 fake cookies
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Asap-Interval-Ms: 10000
+RL: X-Rate-Limit-Asap-Max: 1000000
+RL: X-Rate-Limit-Asap-Remaining: 997604
+BODY: invalid token
+
+==== X4 OAuth1.0 style header
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Unauthed-Ip-Interval-Ms: 10000
+RL: X-Rate-Limit-Unauthed-Ip-Max: 200
+RL: X-Rate-Limit-Unauthed-Ip-Remaining: 199
+BODY: invalid token
+
+==== X5 key only
+STATUS: HTTP/1.1 401 Unauthorized
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Api-Key-Interval-Ms: 10000
+RL: X-Rate-Limit-Api-Key-Max: 300
+RL: X-Rate-Limit-Api-Key-Remaining: 298
+RL: X-Rate-Limit-Db-Query-Time-Interval-Ms: 600000
+RL: X-Rate-Limit-Db-Query-Time-Max: 7200000
+RL: X-Rate-Limit-Db-Query-Time-Remaining: 7199990
+RL: X-Rate-Limit-Api-Key-No-Token-Interval-Ms: 10000
+RL: X-Rate-Limit-Api-Key-No-Token-Max: 100
+RL: X-Rate-Limit-Api-Key-No-Token-Remaining: 99
+BODY: invalid key
+
+==== X6 token only
+STATUS: HTTP/1.1 401 Unauthorized
+CT: Content-Type: text/plain; charset=utf-8
+BODY: invalid key
+
+==== X7 board lists no auth
+STATUS: HTTP/1.1 404 Not Found
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Asap-Interval-Ms: 10000
+RL: X-Rate-Limit-Asap-Max: 1000000
+RL: X-Rate-Limit-Asap-Remaining: 995953
+BODY: Board not found
+
+==== X8 batch
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: application/json; charset=utf-8
+BODY: {"message":"Invalid value for urls","error":"ERROR"}
+
+==== X9 POST boards no auth
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: application/json; charset=utf-8
+RL: X-Rate-Limit-Asap-Interval-Ms: 10000
+RL: X-Rate-Limit-Asap-Max: 1000000
+RL: X-Rate-Limit-Asap-Remaining: 995198
+BODY: {"message":"invalid value for name","error":"ERROR"}
+
+==== X10 nested members no auth
+STATUS: HTTP/1.1 400 Bad Request
+CT: Content-Type: text/plain; charset=utf-8
+RL: X-Rate-Limit-Asap-Interval-Ms: 10000
+RL: X-Rate-Limit-Asap-Max: 1000000
+RL: X-Rate-Limit-Asap-Remaining: 994790
+BODY: invalid token
+

@@ -1,0 +1,47 @@
+- generic [ref=f3e105]:
+  - main [ref=f3e106]:
+    - generic [ref=f3e107]:
+      - img "Trello" [ref=f3e108]
+      - heading "Sign up to continue" [level=1] [ref=f3e114]
+    - generic [ref=f3e116]:
+      - generic [ref=f3e118]:
+        - generic [ref=f3e119]: Email
+        - textbox "Email" [ref=f3e121]:
+          - /placeholder: Enter your email
+          - text: probe-nonexistent-user-918273@invalid-domain-xyz.test
+      - paragraph [ref=f3e123]:
+        - text: By signing up, I accept the Atlassian
+        - link "Cloud Terms of Service , (opens new window)" [ref=f3e124] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/cloud-terms-of-service
+          - text: Cloud Terms of Service
+          - generic [ref=f3e128]: ", (opens new window)"
+        - text: and acknowledge the
+        - link "Privacy Policy , (opens new window)" [ref=f3e129] [cursor=pointer]:
+          - /url: https://www.atlassian.com/legal/privacy-policy
+          - text: Privacy Policy
+          - generic [ref=f3e133]: ", (opens new window)"
+        - text: .
+      - button "Sign up" [ref=f3e135] [cursor=pointer]
+    - list [ref=f3e137]:
+      - text: "Or continue with:"
+      - generic [ref=f3e138]:
+        - listitem [ref=f3e139]:
+          - button "Google" [ref=f3e140] [cursor=pointer]
+        - listitem [ref=f3e143]:
+          - button "Microsoft" [ref=f3e144] [cursor=pointer]
+      - generic [ref=f3e147]:
+        - listitem [ref=f3e148]:
+          - button "Apple" [ref=f3e149] [cursor=pointer]
+        - listitem [ref=f3e152]:
+          - button "Slack" [ref=f3e153] [cursor=pointer]
+    - link "Already have an Atlassian account? Log in" [ref=f3e157] [cursor=pointer]:
+      - /url: /login?application=trello&email=probe-nonexistent-user-918273%40invalid-domain-xyz.test&redirectedFrom=login
+  - contentinfo [ref=f3e158]:
+    - generic [ref=f3e159]:
+      - img "Atlassian" [ref=f3e160]
+      - generic [ref=f3e164]:
+        - link "One account , (opens new window)" [ref=f3e165] [cursor=pointer]:
+          - /url: https://support.atlassian.com/atlassian-account/docs/what-is-an-atlassian-account/
+          - text: One account
+          - generic [ref=f3e169]: ", (opens new window)"
+        - text: for Trello, Jira, Confluence and more.
