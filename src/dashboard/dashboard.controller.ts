@@ -20,8 +20,8 @@ export class DashboardController {
   @ApiOperation({ summary: 'Get dashboard overview' })
   @ApiResponse({ status: 200, description: 'Dashboard overview retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  getOverview() {
-    const data = this.dashboardService.getOverview();
+  async getOverview() {
+    const data = await this.dashboardService.getOverview();
     return successResponse('Dashboard overview retrieved successfully', data);
   }
 }

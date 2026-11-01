@@ -3,6 +3,8 @@ import {
   NotFoundException,
   ConflictException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, ILike } from 'typeorm';
 import { EventCategory } from './entities/event-category.entity.js';
 import { CreateEventCategoryDto } from './dto/create-event-category.dto.js';
 import { UpdateEventCategoryDto } from './dto/update-event-category.dto.js';
@@ -16,59 +18,56 @@ function slugify(text: string): string {
 
 @Injectable()
 export class EventCategoriesService {
-  private categories: EventCategory[] = [
-    { id: 'cat_001', name: 'Technology', slug: 'technology', createdAt: new Date() },
-    { id: 'cat_002', name: 'Business', slug: 'business', createdAt: new Date() },
-    { id: 'cat_003', name: 'Education', slug: 'education', createdAt: new Date() },
-    { id: 'cat_004', name: 'Workshop', slug: 'workshop', createdAt: new Date() },
-    { id: 'cat_005', name: 'Conference', slug: 'conference', createdAt: new Date() },
-    { id: 'cat_006', name: 'Entertainment', slug: 'entertainment', createdAt: new Date() },
-  ];
+  constructor(
+    @InjectRepository(EventCategory)
+    private readonly categoryRepository: Repository<EventCategory>,
+  ) {}
 
-  findAll(): EventCategory[] {
-    return this.categories;
+  async findAll(): Promise<EventCategory[]> {
+    return this.categoryRepository.find();
   }
 
-  findById(id: string): EventCategory {
-    const cat = this.categories.find((c) => c.id === id);
-    if (!cat) throw new NotFoundException(`Category with id "${id}" not found`);
-    return cat;
-  }
-
-  create(dto: CreateEventCategoryDto): EventCategory {
-    const existing = this.categories.find(
-      (c) => c.name.toLowerCase() === dto.name.toLowerCase(),
-    );
-    if (existing) throw new ConflictException(`Category "${dto.name}" already exists`);
-
-    const category: EventCategory = {
-      id: `cat_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-      name: dto.name,
-      slug: slugify(dto.name),
-      createdAt: new Date(),
-    };
-    this.categories.push(category);
+  async findById(id: string): Promise<EventCategory> {
+    const category = await this.categoryRepository.findOneBy({ id });
+    if (!category) throw new NotFoundException(`Category with id "${id}" not found`);
     return category;
   }
 
-  update(id: string, dto: UpdateEventCategoryDto): EventCategory {
-    const category = this.findById(id);
+  async create(dto: CreateEventCategoryDto): Promise<EventCategory> {
+    const existing = await this.categoryRepository.findOneBy({
+      name: ILike(dto.name),
+    });
+    if (existing) throw new ConflictException(`Category "${dto.name}" already exists`);
+
+    const category = this.categoryRepository.create({
+      name: dto.name,
+      slug: slugify(dto.name),
+    });
+
+    return this.categoryRepository.save(category);
+  }
+
+  async update(id: string, dto: UpdateEventCategoryDto): Promise<EventCategory> {
+    const category = await this.findById(id);
 
     if (dto.name) {
-      const existing = this.categories.find(
-        (c) => c.name.toLowerCase() === dto.name!.toLowerCase() && c.id !== id,
-      );
+      const existing = await this.categoryRepository
+        .createQueryBuilder('category')
+        .where('LOWER(category.name) = :name', {
+          name: dto.name.toLowerCase(),
+        })
+        .andWhere('category.id != :id', { id })
+        .getOne();
       if (existing) throw new ConflictException(`Category "${dto.name}" already exists`);
       category.name = dto.name;
       category.slug = slugify(dto.name);
     }
 
-    return category;
+    return this.categoryRepository.save(category);
   }
 
-  delete(id: string): void {
-    const index = this.categories.findIndex((c) => c.id === id);
-    if (index === -1) throw new NotFoundException(`Category with id "${id}" not found`);
-    this.categories.splice(index, 1);
+  async delete(id: string): Promise<void> {
+    const category = await this.findById(id);
+    await this.categoryRepository.remove(category);
   }
 }

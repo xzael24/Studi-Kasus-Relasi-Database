@@ -1,51 +1,67 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
-  Body,
   Put,
-  Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { BooksService } from './books.service.js';
 import { Book } from './entities/book.entity.js';
+import { BookAuthor } from './entities/book-author.entity.js';
 import { CreateBookDto } from './dto/create-book-dto.js';
 import { UpdateBookDto } from './dto/update-book-dto.js';
 
+@ApiTags('Books')
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
-  // 1. READ ALL BOOKS
   @Get()
-  findAll(): Book[] {
+  findAll(): Promise<Book[]> {
     return this.booksService.findAll();
   }
 
-  // 2. READ ONE BOOK (dengan parameter id)
-  // Contoh akses: GET /books/1
   @Get(':id')
-  findOne(@Param('id') id: string): Book {
-    return this.booksService.findOne(+id);
+  findOne(@Param('id') id: string): Promise<Book> {
+    return this.booksService.findOne(id);
   }
 
-  // 3. CREATE A BOOK
   @Post()
-  create(@Body() bookData: CreateBookDto): Book {
-    return this.booksService.create(bookData);
+  create(@Body() dto: CreateBookDto): Promise<Book> {
+    return this.booksService.create(dto);
   }
 
-  // 4. UPDATE A BOOK
-  // Contoh akses: PUT /books/1
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateData: UpdateBookDto): Book {
-    return this.booksService.update(+id, updateData);
+  update(@Param('id') id: string, @Body() dto: UpdateBookDto): Promise<Book> {
+    return this.booksService.update(id, dto);
   }
 
-  // 5. DELETE A BOOK
-  // Contoh akses: DELETE /books/1
   @Delete(':id')
-  remove(@Param('id') id: string): { message: string } {
-    return this.booksService.remove(+id);
+  remove(@Param('id') id: string): Promise<{ message: string }> {
+    return this.booksService.remove(id);
+  }
+
+  @Get(':id/authors')
+  findAuthors(@Param('id') id: string): Promise<BookAuthor[]> {
+    return this.booksService.findAuthors(id);
+  }
+
+  @Post(':id/authors/:authorId')
+  addAuthor(
+    @Param('id') id: string,
+    @Param('authorId') authorId: string,
+  ): Promise<BookAuthor> {
+    return this.booksService.addAuthor(id, authorId);
+  }
+
+  @Delete(':id/authors/:authorId')
+  removeAuthor(
+    @Param('id') id: string,
+    @Param('authorId') authorId: string,
+  ): Promise<{ message: string }> {
+    return this.booksService.removeAuthor(id, authorId);
   }
 }

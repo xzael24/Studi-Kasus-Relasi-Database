@@ -1,51 +1,48 @@
 import {
-    Controller,
-    Get,
-    Param,
-    Post,
-    Body,
-    Put,
-    Delete,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service.js';
-import { category } from './entities/categories.entity.js';
+import { Category } from './entities/categories.entity.js';
 import { CreateCategoryDto } from './dto/create-category-dto.js';
 import { UpdateCategoryDto } from './dto/update-category-dto.js';
 
+@ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
-    constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) {}
 
-    // 1. READ ALL CATEGORIES
-    @Get()
-    findAll(): category[] {
-        return this.categoriesService.findAll();
-    }
+  @Get()
+  findAll(): Promise<Category[]> {
+    return this.categoriesService.findAll();
+  }
 
-    // 2. READ ONE CATEGORY (dengan parameter id)
-    // Contoh akses: GET /categories/1
-    @Get(':id')
-    findOne(@Param('id') id: string): category {
-        return this.categoriesService.findOne(+id);
-    }
+  @Get(':id')
+  findOne(@Param('id') id: string): Promise<Category> {
+    return this.categoriesService.findOne(id);
+  }
 
-    // 3. CREATE A CATEGORY
-    @Post()
-    create(@Body() categoryData: CreateCategoryDto): category {
-        return this.categoriesService.create(categoryData);
-    }
+  @Post()
+  create(@Body() dto: CreateCategoryDto): Promise<Category> {
+    return this.categoriesService.create(dto);
+  }
 
-    // 4. UPDATE A CATEGORY
-    // Contoh akses: PUT /categories/1
-    @Put(':id')
-    update(@Param('id') id: string, @Body() updateData: UpdateCategoryDto): category {
-        return this.categoriesService.update(+id, updateData);
-    }
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() dto: UpdateCategoryDto,
+  ): Promise<Category> {
+    return this.categoriesService.update(id, dto);
+  }
 
-    // 5. DELETE A CATEGORY
-    // Contoh akses: DELETE /categories/1
-    @Delete(':id')
-    remove(@Param('id') id: string): { message: string } {
-        return this.categoriesService.remove(+id);
-    }
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<{ message: string }> {
+    return this.categoriesService.remove(id);
+  }
 }

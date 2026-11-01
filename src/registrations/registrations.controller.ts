@@ -38,25 +38,27 @@ export class RegistrationsController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get my registrations' })
   @ApiResponse({ status: 200, description: 'Registrations retrieved successfully' })
-  getMyRegistrations(@CurrentUser() user: AuthenticatedUser) {
-    const regs = this.registrationsService.findByUserId(user.id);
-    const data = regs.map((r) => {
-      const event = this.eventsService.findById(r.eventId);
-      const ticket = this.ticketsService.findById(r.ticketId);
-      return {
-        id: r.id,
-        event: {
-          id: event.id,
-          title: event.title,
-          startDate: event.startDate,
-        },
-        ticket: {
-          name: ticket.name,
-          price: ticket.price,
-        },
-        status: r.status,
-      };
-    });
+  async getMyRegistrations(@CurrentUser() user: AuthenticatedUser) {
+    const regs = await this.registrationsService.findByUserId(user.id);
+    const data = await Promise.all(
+      regs.map(async (r) => {
+        const event = await this.eventsService.findById(r.eventId);
+        const ticket = await this.ticketsService.findById(r.ticketId);
+        return {
+          id: r.id,
+          event: {
+            id: event.id,
+            title: event.title,
+            startDate: event.startDate,
+          },
+          ticket: {
+            name: ticket.name,
+            price: ticket.price,
+          },
+          status: r.status,
+        };
+      }),
+    );
     return successResponse('Registrations retrieved successfully', data);
   }
 
@@ -67,10 +69,10 @@ export class RegistrationsController {
   @ApiOperation({ summary: 'Get registration detail' })
   @ApiResponse({ status: 200, description: 'Registration retrieved successfully' })
   @ApiResponse({ status: 404, description: 'Registration not found' })
-  findOne(@Param('id') id: string) {
-    const reg = this.registrationsService.findById(id);
-    const event = this.eventsService.findById(reg.eventId);
-    const ticket = this.ticketsService.findById(reg.ticketId);
+  async findOne(@Param('id') id: string) {
+    const reg = await this.registrationsService.findById(id);
+    const event = await this.eventsService.findById(reg.eventId);
+    const ticket = await this.ticketsService.findById(reg.ticketId);
     return successResponse('Registration retrieved successfully', {
       id: reg.id,
       status: reg.status,
@@ -89,8 +91,8 @@ export class RegistrationsController {
   @ApiResponse({ status: 200, description: 'Registration cancelled successfully' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Registration not found' })
-  cancel(@Param('id') id: string, @CurrentUser() user: AuthenticatedUser) {
-    this.registrationsService.cancel(id, user.id);
+  async cancel(@Param('id') id: string, @CurrentUser() user: AuthenticatedUser) {
+    await this.registrationsService.cancel(id, user.id);
     return successResponse('Registration cancelled successfully');
   }
 }

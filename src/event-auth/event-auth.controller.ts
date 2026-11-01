@@ -30,8 +30,8 @@ export class EventAuthController {
   @ApiResponse({ status: 201, description: 'Registration successful' })
   @ApiResponse({ status: 409, description: 'Email already registered' })
   @ApiResponse({ status: 422, description: 'Validation error' })
-  register(@Body() dto: RegisterDto) {
-    const data = this.eventAuthService.register(dto);
+  async register(@Body() dto: RegisterDto) {
+    const data = await this.eventAuthService.register(dto);
     return successResponse('Registration successful', data);
   }
 
@@ -40,8 +40,8 @@ export class EventAuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({ status: 200, description: 'Login successful' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  login(@Body() dto: LoginDto) {
-    const data = this.eventAuthService.login(dto);
+  async login(@Body() dto: LoginDto) {
+    const data = await this.eventAuthService.login(dto);
     return successResponse('Login successful', data);
   }
 

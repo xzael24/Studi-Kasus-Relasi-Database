@@ -1,73 +1,42 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { category } from './entities/categories.entity.js';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Category } from './entities/categories.entity.js';
 import { CreateCategoryDto } from './dto/create-category-dto.js';
 import { UpdateCategoryDto } from './dto/update-category-dto.js';
 
 @Injectable()
 export class CategoriesService {
-    private categories: category[] = [
-        {
-            id: 1,
-            categoryName: 'Novel',
-        },
-        {
-            id: 2,
-            categoryName: 'Teknologi',
-        },
-        {
-            id: 3,
-            categoryName: 'Sains',
-        },
-    ];
+  constructor(
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+  ) {}
 
-    // Auto-increment id helper
-    private nextId(): number {
-        return this.categories.length > 0
-            ? Math.max(...this.categories.map((c) => c.id)) + 1
-            : 1;
-    }
+  findAll(): Promise<Category[]> {
+    return this.categoryRepository.find();
+  }
 
-    // 1. GET ALL CATEGORIES
-    findAll(): category[] {
-        return this.categories;
+  async findOne(id: string): Promise<Category> {
+    const category = await this.categoryRepository.findOneBy({ id });
+    if (!category) {
+      throw new NotFoundException(`Category dengan ID ${id} tidak ditemukan`);
     }
+    return category;
+  }
 
-    // 2. GET ONE CATEGORY BY ID
-    findOne(id: number): category {
-        const cat = this.categories.find((c) => c.id === id);
-        if (!cat) {
-            throw new NotFoundException(`Category dengan ID ${id} tidak ditemukan`);
-        }
-        return cat;
-    }
+  create(dto: CreateCategoryDto): Promise<Category> {
+    return this.categoryRepository.save(this.categoryRepository.create(dto));
+  }
 
-    // 3. CREATE A CATEGORY
-    create(categoryData: CreateCategoryDto): category {
-        const newCategory: category = {
-            id: this.nextId(),
-            categoryName: categoryData.categoryName ?? '',
-        };
-        this.categories.push(newCategory);
-        return newCategory;
-    }
+  async update(id: string, dto: UpdateCategoryDto): Promise<Category> {
+    const category = await this.findOne(id);
+    Object.assign(category, dto, { id });
+    return this.categoryRepository.save(category);
+  }
 
-    // 4. UPDATE A CATEGORY
-    update(id: number, updateData: UpdateCategoryDto): category {
-        const index = this.categories.findIndex((c) => c.id === id);
-        if (index === -1) {
-            throw new NotFoundException(`Category dengan ID ${id} tidak ditemukan`);
-        }
-        this.categories[index] = { ...this.categories[index], ...updateData, id };
-        return this.categories[index];
-    }
-
-    // 5. DELETE A CATEGORY
-    remove(id: number): { message: string } {
-        const index = this.categories.findIndex((c) => c.id === id);
-        if (index === -1) {
-            throw new NotFoundException(`Category dengan ID ${id} tidak ditemukan`);
-        }
-        this.categories.splice(index, 1);
-        return { message: `Category dengan ID ${id} berhasil dihapus` };
-    }
+  async remove(id: string): Promise<{ message: string }> {
+    const category = await this.findOne(id);
+    await this.categoryRepository.remove(category);
+    return { message: `Category dengan ID ${id} berhasil dihapus` };
+  }
 }

@@ -3,51 +3,55 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Ticket } from './entities/ticket.entity.js';
 import { CreateTicketDto } from './dto/create-ticket.dto.js';
 
 @Injectable()
 export class TicketsService {
-  private tickets: Ticket[] = [];
+  constructor(
+    @InjectRepository(Ticket)
+    private readonly ticketRepository: Repository<Ticket>,
+  ) {}
 
-  findByEventId(eventId: string): Ticket[] {
-    return this.tickets.filter((t) => t.eventId === eventId);
+  async findByEventId(eventId: string): Promise<Ticket[]> {
+    return this.ticketRepository.find({ where: { eventId } });
   }
 
-  findById(id: string): Ticket {
-    const ticket = this.tickets.find((t) => t.id === id);
+  async findById(id: string): Promise<Ticket> {
+    const ticket = await this.ticketRepository.findOneBy({ id });
     if (!ticket) throw new NotFoundException(`Ticket with id "${id}" not found`);
     return ticket;
   }
 
-  create(eventId: string, dto: CreateTicketDto): Ticket {
-    const ticket: Ticket = {
-      id: `ticket_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+  async create(eventId: string, dto: CreateTicketDto): Promise<Ticket> {
+    const ticket = this.ticketRepository.create({
       eventId,
       name: dto.name,
       description: dto.description,
       price: dto.price,
       quota: dto.quota,
       sold: 0,
-      createdAt: new Date(),
-    };
-    this.tickets.push(ticket);
-    return ticket;
+    });
+
+    return this.ticketRepository.save(ticket);
   }
 
-  incrementSold(ticketId: string): Ticket {
-    const ticket = this.findById(ticketId);
+  async incrementSold(ticketId: string): Promise<Ticket> {
+    const ticket = await this.findById(ticketId);
     if (ticket.sold >= ticket.quota) {
       throw new BadRequestException('Ticket quota is full');
     }
     ticket.sold += 1;
-    return ticket;
+    return this.ticketRepository.save(ticket);
   }
 
-  decrementSold(ticketId: string): void {
-    const ticket = this.findById(ticketId);
+  async decrementSold(ticketId: string): Promise<void> {
+    const ticket = await this.findById(ticketId);
     if (ticket.sold > 0) {
       ticket.sold -= 1;
+      await this.ticketRepository.save(ticket);
     }
   }
 

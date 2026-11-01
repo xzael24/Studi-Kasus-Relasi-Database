@@ -1,0 +1,13 @@
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "postgres-db",
+  "port": 5432,
+  "username": "postgres",
+  "password": "123",
+  "database": "zaim",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "migrations": ["src/migration/**/*.ts"],
+  "synchronize": true,
+  "logging": true
+}

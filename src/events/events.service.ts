@@ -4,6 +4,8 @@ import {
   BadRequestException,
   ForbiddenException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Event } from './entities/event.entity.js';
 import { CreateEventDto } from './dto/create-event.dto.js';
 import { UpdateEventDto } from './dto/update-event.dto.js';
@@ -19,67 +21,63 @@ function slugify(text: string): string {
 
 @Injectable()
 export class EventsService {
-  private events: Event[] = [];
+  constructor(
+    @InjectRepository(Event)
+    private readonly eventRepository: Repository<Event>,
+    private readonly categoriesService: EventCategoriesService,
+  ) {}
 
-  constructor(private readonly categoriesService: EventCategoriesService) {}
+  async findAll(filter: EventFilterDto) {
+    const qb = this.eventRepository.createQueryBuilder('event');
 
-  findAll(filter: EventFilterDto) {
-    let results = [...this.events];
-
-    // Filter by search (title or description)
     if (filter.search) {
-      const q = filter.search.toLowerCase();
-      results = results.filter(
-        (e) =>
-          e.title.toLowerCase().includes(q) ||
-          e.description.toLowerCase().includes(q),
+      const q = `%${filter.search.toLowerCase()}%`;
+      qb.andWhere(
+        '(LOWER(event.title) LIKE :q OR LOWER(event.description) LIKE :q)',
+        { q },
       );
     }
 
-    // Filter by category slug
-    if (filter.category) {
-      const slug = filter.category.toLowerCase();
-      results = results.filter((e) => {
-        try {
-          const cat = this.categoriesService.findById(e.categoryId);
-          return cat.slug === slug || cat.name.toLowerCase() === slug;
-        } catch {
-          return false;
-        }
+    if (filter.status) {
+      qb.andWhere('event.status = :status', { status: filter.status });
+    }
+
+    if (filter.startDate) {
+      qb.andWhere('event.startDate >= :startDate', {
+        startDate: filter.startDate,
+      });
+    }
+    if (filter.endDate) {
+      qb.andWhere('event.endDate <= :endDate', {
+        endDate: filter.endDate,
       });
     }
 
-    // Filter by status
-    if (filter.status) {
-      results = results.filter((e) => e.status === filter.status);
+    const [events, total] = await qb.getManyAndCount();
+
+    // Load all categories once to avoid N+1 lookups
+    const allCategories = await this.categoriesService.findAll();
+    const categoryMap = new Map(allCategories.map((c) => [c.id, c]));
+
+    let results = events;
+
+    if (filter.category) {
+      const slug = filter.category.toLowerCase();
+      results = results.filter((e) => {
+        const cat = categoryMap.get(e.categoryId);
+        if (!cat) return false;
+        return cat.slug === slug || cat.name.toLowerCase() === slug;
+      });
     }
 
-    // Filter by date range
-    if (filter.startDate) {
-      results = results.filter(
-        (e) => new Date(e.startDate) >= new Date(filter.startDate!),
-      );
-    }
-    if (filter.endDate) {
-      results = results.filter(
-        (e) => new Date(e.endDate) <= new Date(filter.endDate!),
-      );
-    }
-
-    const total = results.length;
     const page = filter.page ?? 1;
     const limit = filter.limit ?? 10;
     const offset = (page - 1) * limit;
     const paged = results.slice(offset, offset + limit);
 
     const data = paged.map((e) => {
-      let category: { id: string; name: string } | undefined;
-      try {
-        const cat = this.categoriesService.findById(e.categoryId);
-        category = { id: cat.id, name: cat.name };
-      } catch {
-        // category might have been deleted
-      }
+      const cat = categoryMap.get(e.categoryId);
+      const category = cat ? { id: cat.id, name: cat.name } : undefined;
       return {
         id: e.id,
         title: e.title,
@@ -96,23 +94,22 @@ export class EventsService {
     return { data, total, page, limit };
   }
 
-  findById(id: string): Event {
-    const event = this.events.find((e) => e.id === id);
+  async findById(id: string): Promise<Event> {
+    const event = await this.eventRepository.findOneBy({ id });
     if (!event) throw new NotFoundException(`Event with id "${id}" not found`);
     return event;
   }
 
-  create(dto: CreateEventDto, organizerId: string): Event {
+  async create(dto: CreateEventDto, organizerId: string): Promise<Event> {
     // Business validation: endDate > startDate
     if (new Date(dto.endDate) <= new Date(dto.startDate)) {
       throw new BadRequestException('endDate must be after startDate');
     }
 
     // Validate category exists
-    this.categoriesService.findById(dto.categoryId);
+    await this.categoriesService.findById(dto.categoryId);
 
-    const event: Event = {
-      id: `evt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    const event = this.eventRepository.create({
       title: dto.title,
       slug: slugify(dto.title),
       description: dto.description,
@@ -123,15 +120,13 @@ export class EventsService {
       capacity: dto.capacity,
       status: 'draft',
       organizerId,
-      createdAt: new Date(),
-    };
+    });
 
-    this.events.push(event);
-    return event;
+    return this.eventRepository.save(event);
   }
 
-  update(id: string, dto: UpdateEventDto, userId: string): Event {
-    const event = this.findById(id);
+  async update(id: string, dto: UpdateEventDto, userId: string): Promise<Event> {
+    const event = await this.findById(id);
 
     if (event.organizerId !== userId) {
       throw new ForbiddenException('You are not the organizer of this event');
@@ -143,7 +138,7 @@ export class EventsService {
     }
     if (dto.description !== undefined) event.description = dto.description;
     if (dto.categoryId) {
-      this.categoriesService.findById(dto.categoryId);
+      await this.categoriesService.findById(dto.categoryId);
       event.categoryId = dto.categoryId;
     }
     if (dto.location) event.location = dto.location;
@@ -156,20 +151,19 @@ export class EventsService {
       throw new BadRequestException('endDate must be after startDate');
     }
 
-    return event;
+    return this.eventRepository.save(event);
   }
 
-  delete(id: string, userId: string): void {
-    const event = this.findById(id);
+  async delete(id: string, userId: string): Promise<void> {
+    const event = await this.findById(id);
     if (event.organizerId !== userId) {
       throw new ForbiddenException('You are not the organizer of this event');
     }
-    const index = this.events.findIndex((e) => e.id === id);
-    this.events.splice(index, 1);
+    await this.eventRepository.remove(event);
   }
 
-  publish(id: string, userId: string): Event {
-    const event = this.findById(id);
+  async publish(id: string, userId: string): Promise<Event> {
+    const event = await this.findById(id);
     if (event.organizerId !== userId) {
       throw new ForbiddenException('You are not the organizer of this event');
     }
@@ -177,17 +171,17 @@ export class EventsService {
       throw new BadRequestException('Event is already published');
     }
     event.status = 'published';
-    return event;
+    return this.eventRepository.save(event);
   }
 
-  getEventWithDetails(
+  async getEventWithDetails(
     id: string,
     registrationsCount: number,
   ) {
-    const event = this.findById(id);
+    const event = await this.findById(id);
     let category: { id: string; name: string } | undefined;
     try {
-      const cat = this.categoriesService.findById(event.categoryId);
+      const cat = await this.categoriesService.findById(event.categoryId);
       category = { id: cat.id, name: cat.name };
     } catch {
       // ok

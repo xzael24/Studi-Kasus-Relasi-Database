@@ -1,7 +1,5 @@
-export class UpdateBookDto {
-    readonly title?: string;
-    readonly author?: string;
-    readonly isbn?: string;
-    readonly publishedYear?: number;
-    readonly isAvailable?: boolean;
-}
+import { PartialType } from '@nestjs/swagger';
+import { CreateBookDto } from './create-book-dto.js';
+
+export class UpdateBookDto extends PartialType(CreateBookDto) {}
+

@@ -30,8 +30,8 @@ export class EventCategoriesController {
   @Get()
   @ApiOperation({ summary: 'Get all event categories' })
   @ApiResponse({ status: 200, description: 'Event categories retrieved successfully' })
-  findAll() {
-    const data = this.service.findAll();
+  async findAll() {
+    const data = await this.service.findAll();
     return successResponse('Event categories retrieved successfully', data);
   }
 
@@ -39,8 +39,8 @@ export class EventCategoriesController {
   @ApiOperation({ summary: 'Get event category by id' })
   @ApiResponse({ status: 200, description: 'Event category retrieved successfully' })
   @ApiResponse({ status: 404, description: 'Category not found' })
-  findOne(@Param('id') id: string) {
-    const data = this.service.findById(id);
+  async findOne(@Param('id') id: string) {
+    const data = await this.service.findById(id);
     return successResponse('Event category retrieved successfully', data);
   }
 
@@ -51,8 +51,8 @@ export class EventCategoriesController {
   @ApiOperation({ summary: 'Create a new event category' })
   @ApiResponse({ status: 201, description: 'Event category created successfully' })
   @ApiResponse({ status: 409, description: 'Category name already exists' })
-  create(@Body() dto: CreateEventCategoryDto) {
-    const data = this.service.create(dto);
+  async create(@Body() dto: CreateEventCategoryDto) {
+    const data = await this.service.create(dto);
     return successResponse('Event category created successfully', data);
   }
 
@@ -62,8 +62,8 @@ export class EventCategoriesController {
   @ApiOperation({ summary: 'Update event category' })
   @ApiResponse({ status: 200, description: 'Event category updated successfully' })
   @ApiResponse({ status: 404, description: 'Category not found' })
-  update(@Param('id') id: string, @Body() dto: UpdateEventCategoryDto) {
-    const data = this.service.update(id, dto);
+  async update(@Param('id') id: string, @Body() dto: UpdateEventCategoryDto) {
+    const data = await this.service.update(id, dto);
     return successResponse('Event category updated successfully', data);
   }
 
@@ -74,8 +74,8 @@ export class EventCategoriesController {
   @ApiOperation({ summary: 'Delete event category' })
   @ApiResponse({ status: 200, description: 'Event category deleted successfully' })
   @ApiResponse({ status: 404, description: 'Category not found' })
-  delete(@Param('id') id: string) {
-    this.service.delete(id);
+  async delete(@Param('id') id: string) {
+    await this.service.delete(id);
     return successResponse('Event category deleted successfully');
   }
 }

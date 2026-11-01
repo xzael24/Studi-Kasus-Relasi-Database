@@ -6,6 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { QueryFailedError } from 'typeorm';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -28,6 +29,24 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const resp = exceptionResponse as Record<string, unknown>;
         message = (resp.message as string | string[]) ?? exception.message;
         error = (resp.error as string) ?? exception.name;
+      }
+    }
+
+    // Constraint database diterjemahkan jadi error HTTP yang jelas
+    if (exception instanceof QueryFailedError) {
+      const code = (exception.driverError as { code?: string })?.code;
+      if (code === '23505') {
+        statusCode = HttpStatus.CONFLICT;
+        message = 'Data dengan nilai unik tersebut sudah ada';
+        error = 'Conflict';
+      } else if (code === '23503') {
+        statusCode = HttpStatus.BAD_REQUEST;
+        message = 'Relasi data tidak ditemukan atau masih dipakai data lain';
+        error = 'Bad Request';
+      } else if (code === '22P02') {
+        statusCode = HttpStatus.BAD_REQUEST;
+        message = 'Format ID tidak valid (harus UUID)';
+        error = 'Bad Request';
       }
     }
 

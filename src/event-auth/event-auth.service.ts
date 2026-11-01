@@ -24,17 +24,17 @@ function generateToken(): string {
 export class EventAuthService {
   constructor(private readonly usersService: UsersService) {}
 
-  register(dto: RegisterDto) {
+  async register(dto: RegisterDto) {
     if (dto.password !== dto.passwordConfirmation) {
       throw new BadRequestException('Password and password confirmation do not match');
     }
 
-    const existing = this.usersService.findByEmail(dto.email);
+    const existing = await this.usersService.findByEmail(dto.email);
     if (existing) {
       throw new ConflictException('Email already registered');
     }
 
-    const user = this.usersService.create({
+    const user = await this.usersService.create({
       name: dto.name,
       email: dto.email,
       password: dto.password, // In production: hash with bcrypt
@@ -54,8 +54,8 @@ export class EventAuthService {
     };
   }
 
-  login(dto: LoginDto) {
-    const user = this.usersService.findByEmail(dto.email);
+  async login(dto: LoginDto) {
+    const user = await this.usersService.findByEmail(dto.email);
     if (!user || user.password !== dto.password) {
       throw new UnauthorizedException('Invalid email or password');
     }

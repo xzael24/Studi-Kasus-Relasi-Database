@@ -1,81 +1,88 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Book } from './entities/book.entity.js';
+import { BookAuthor } from './entities/book-author.entity.js';
 import { CreateBookDto } from './dto/create-book-dto.js';
 import { UpdateBookDto } from './dto/update-book-dto.js';
 
+const BOOK_RELATIONS = {
+  category: true,
+  publisher: true,
+  bookAuthors: { author: true },
+};
+
 @Injectable()
 export class BooksService {
-    private books: Book[] = [
-        {
-            id: 1,
-            title: 'Clean Code',
-            author: 'Robert C. Martin',
-            isbn: '978-0132350884',
-            publishedYear: 2008,
-            isAvailable: true,
-        },
-        {
-            id: 2,
-            title: 'The Pragmatic Programmer',
-            author: 'Andrew Hunt',
-            isbn: '978-0135957059',
-            publishedYear: 2019,
-            isAvailable: true,
-        },
-    ];
+  constructor(
+    @InjectRepository(Book)
+    private readonly bookRepository: Repository<Book>,
+    @InjectRepository(BookAuthor)
+    private readonly bookAuthorRepository: Repository<BookAuthor>,
+  ) {}
 
-    // Auto-increment id helper
-    private nextId(): number {
-        return this.books.length > 0
-            ? Math.max(...this.books.map((b) => b.id)) + 1
-            : 1;
-    }
+  findAll(): Promise<Book[]> {
+    return this.bookRepository.find({ relations: BOOK_RELATIONS });
+  }
 
-    // 1. GET ALL BOOKS
-    findAll(): Book[] {
-        return this.books;
+  async findOne(id: string): Promise<Book> {
+    const book = await this.bookRepository.findOne({
+      where: { id },
+      relations: BOOK_RELATIONS,
+    });
+    if (!book) {
+      throw new NotFoundException(`Buku dengan ID ${id} tidak ditemukan`);
     }
+    return book;
+  }
 
-    // 2. GET ONE BOOK BY ID
-    findOne(id: number): Book {
-        const book = this.books.find((b) => b.id === id);
-        if (!book) {
-            throw new NotFoundException(`Buku dengan ID ${id} tidak ditemukan`);
-        }
-        return book;
-    }
+  create(dto: CreateBookDto): Promise<Book> {
+    return this.bookRepository.save(this.bookRepository.create(dto));
+  }
 
-    // 3. CREATE A BOOK
-    create(bookData: CreateBookDto): Book {
-        const newBook: Book = {
-            id: this.nextId(),
-            title: bookData.title ?? '',
-            author: bookData.author ?? '',
-            isbn: bookData.isbn ?? '',
-            publishedYear: bookData.publishedYear ?? new Date().getFullYear(),
-            isAvailable: bookData.isAvailable ?? true,
-        };
-        this.books.push(newBook);
-        return newBook;
-    }
+  async update(id: string, dto: UpdateBookDto): Promise<Book> {
+    await this.findOne(id);
+    await this.bookRepository.update(id, dto);
+    return this.findOne(id);
+  }
 
-    // 4. UPDATE A BOOK
-    update(id: number, updateData: UpdateBookDto): Book {
-        const index = this.books.findIndex((b) => b.id === id);
-        if (index === -1) {
-            throw new NotFoundException(`Buku dengan ID ${id} tidak ditemukan`);
-        }
-        this.books[index] = { ...this.books[index], ...updateData, id };
-        return this.books[index];
-    }
+  // soft delete: baris tetap ada, deleted_at diisi
+  async remove(id: string): Promise<{ message: string }> {
+    await this.findOne(id);
+    await this.bookRepository.softDelete(id);
+    return { message: `Buku dengan ID ${id} berhasil dihapus` };
+  }
 
-    // 5. DELETE A BOOK
-    remove(id: number): { message: string } {
-        const index = this.books.findIndex((b) => b.id === id);
-        if (index === -1) {
-            throw new NotFoundException(`Buku dengan ID ${id} tidak ditemukan`);
-        }
-        this.books.splice(index, 1);
-        return { message: `Buku dengan ID ${id} berhasil dihapus` };
+  async findAuthors(bookId: string): Promise<BookAuthor[]> {
+    await this.findOne(bookId);
+    return this.bookAuthorRepository.find({
+      where: { bookId },
+      relations: { author: true },
+    });
+  }
+
+  async addAuthor(bookId: string, authorId: string): Promise<BookAuthor> {
+    await this.findOne(bookId);
+    const existing = await this.bookAuthorRepository.findOneBy({
+      bookId,
+      authorId,
+    });
+    if (existing) return existing;
+    return this.bookAuthorRepository.save(
+      this.bookAuthorRepository.create({ bookId, authorId }),
+    );
+  }
+
+  async removeAuthor(
+    bookId: string,
+    authorId: string,
+  ): Promise<{ message: string }> {
+    const result = await this.bookAuthorRepository.delete({ bookId, authorId });
+    if (!result.affected) {
+      throw new NotFoundException(
+        `Relasi buku ${bookId} dengan author ${authorId} tidak ditemukan`,
+      );
     }
+    return { message: `Author ${authorId} dihapus dari buku ${bookId}` };
+  }
 }

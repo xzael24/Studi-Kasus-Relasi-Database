@@ -11,8 +11,8 @@ export class DashboardService {
     private readonly ticketsService: TicketsService,
   ) {}
 
-  getOverview() {
-    const allEventsData = this.eventsService.findAll({ page: 1, limit: 1000 });
+  async getOverview() {
+    const allEventsData = await this.eventsService.findAll({ page: 1, limit: 1000 });
     const allEvents = allEventsData.data as { id: string; status: string }[];
 
     const totalEvents = allEvents.length;
@@ -31,7 +31,7 @@ export class DashboardService {
     let thisMonthRevenue = 0;
 
     for (const event of allEvents) {
-      const regs = this.registrationsService.findByEventId(event.id);
+      const regs = await this.registrationsService.findByEventId(event.id);
       const activeRegs = regs.filter((r) => r.status !== 'cancelled');
       totalRegistrations += activeRegs.length;
 
@@ -41,7 +41,7 @@ export class DashboardService {
       thisMonthRegistrations += monthRegs.length;
 
       // Tickets for this event
-      const tickets = this.ticketsService.findByEventId(event.id);
+      const tickets = await this.ticketsService.findByEventId(event.id);
       for (const ticket of tickets) {
         totalTicketsSold += ticket.sold;
         totalTicketsAvailable += ticket.quota - ticket.sold;

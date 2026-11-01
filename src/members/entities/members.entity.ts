@@ -1,7 +1,19 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
 export class Member {
-    id: number;
-    name: string;
-    email: string;
-    phone: string;
-    password: string;
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  password: string;
 }

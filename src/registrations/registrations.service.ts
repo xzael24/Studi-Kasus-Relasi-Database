@@ -6,6 +6,8 @@ import {
   Inject,
   forwardRef,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Registration } from './entities/registration.entity.js';
 import { CreateRegistrationDto } from './dto/create-registration.dto.js';
 import { EventsService } from '../events/events.service.js';
@@ -14,22 +16,22 @@ import { UsersService } from '../users/users.service.js';
 
 @Injectable()
 export class RegistrationsService {
-  private registrations: Registration[] = [];
-
   constructor(
+    @InjectRepository(Registration)
+    private readonly registrationRepository: Repository<Registration>,
     @Inject(forwardRef(() => EventsService))
     private readonly eventsService: EventsService,
     private readonly ticketsService: TicketsService,
     private readonly usersService: UsersService,
   ) {}
 
-  register(
+  async register(
     eventId: string,
     dto: CreateRegistrationDto,
     userId: string,
-  ): Registration {
+  ): Promise<Registration> {
     // Check event exists and is published
-    const event = this.eventsService.findById(eventId);
+    const event = await this.eventsService.findById(eventId);
     if (event.status !== 'published') {
       throw new BadRequestException('Event is not published');
     }
@@ -40,7 +42,7 @@ export class RegistrationsService {
     }
 
     // Check ticket exists and belongs to the event
-    const ticket = this.ticketsService.findById(dto.ticketTypeId);
+    const ticket = await this.ticketsService.findById(dto.ticketTypeId);
     if (ticket.eventId !== eventId) {
       throw new BadRequestException('Ticket does not belong to this event');
     }
@@ -51,48 +53,48 @@ export class RegistrationsService {
     }
 
     // Check user not already registered for this event
-    const alreadyRegistered = this.registrations.find(
-      (r) =>
-        r.eventId === eventId &&
-        r.userId === userId &&
-        r.status !== 'cancelled',
-    );
+    const alreadyRegistered = await this.registrationRepository
+      .createQueryBuilder('registration')
+      .where('registration.eventId = :eventId', { eventId })
+      .andWhere('registration.userId = :userId', { userId })
+      .andWhere('registration.status != :cancelled', {
+        cancelled: 'cancelled',
+      })
+      .getOne();
     if (alreadyRegistered) {
       throw new BadRequestException('You are already registered for this event');
     }
 
     // Increment ticket sold
-    this.ticketsService.incrementSold(dto.ticketTypeId);
+    await this.ticketsService.incrementSold(dto.ticketTypeId);
 
-    const registration: Registration = {
-      id: `reg_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    const registration = this.registrationRepository.create({
       eventId,
       userId,
       ticketId: dto.ticketTypeId,
       status: 'registered',
       registeredAt: new Date(),
-    };
+    });
 
-    this.registrations.push(registration);
-    return registration;
+    return this.registrationRepository.save(registration);
   }
 
-  findById(id: string): Registration {
-    const reg = this.registrations.find((r) => r.id === id);
+  async findById(id: string): Promise<Registration> {
+    const reg = await this.registrationRepository.findOneBy({ id });
     if (!reg) throw new NotFoundException(`Registration with id "${id}" not found`);
     return reg;
   }
 
-  findByUserId(userId: string): Registration[] {
-    return this.registrations.filter((r) => r.userId === userId);
+  async findByUserId(userId: string): Promise<Registration[]> {
+    return this.registrationRepository.find({ where: { userId } });
   }
 
-  findByEventId(eventId: string): Registration[] {
-    return this.registrations.filter((r) => r.eventId === eventId);
+  async findByEventId(eventId: string): Promise<Registration[]> {
+    return this.registrationRepository.find({ where: { eventId } });
   }
 
-  cancel(id: string, userId: string): void {
-    const reg = this.findById(id);
+  async cancel(id: string, userId: string): Promise<void> {
+    const reg = await this.findById(id);
     if (reg.userId !== userId) {
       throw new ForbiddenException('You cannot cancel this registration');
     }
@@ -101,12 +103,16 @@ export class RegistrationsService {
     }
 
     // Refund ticket quota
-    this.ticketsService.decrementSold(reg.ticketId);
+    await this.ticketsService.decrementSold(reg.ticketId);
     reg.status = 'cancelled';
+    await this.registrationRepository.save(reg);
   }
 
-  checkIn(eventId: string, registrationId: string): Registration {
-    const reg = this.findById(registrationId);
+  async checkIn(
+    eventId: string,
+    registrationId: string,
+  ): Promise<Registration> {
+    const reg = await this.findById(registrationId);
 
     if (reg.eventId !== eventId) {
       throw new BadRequestException('Registration does not belong to this event');
@@ -122,40 +128,55 @@ export class RegistrationsService {
 
     reg.status = 'checked_in';
     reg.checkedInAt = new Date();
-    return reg;
+    return this.registrationRepository.save(reg);
   }
 
-  getAttendeesForEvent(
+  async getAttendeesForEvent(
     eventId: string,
     page: number = 1,
     limit: number = 20,
     search?: string,
   ) {
-    let regs = this.registrations.filter(
-      (r) => r.eventId === eventId && r.status !== 'cancelled',
-    );
+    const registrations = await this.registrationRepository
+      .createQueryBuilder('registration')
+      .where('registration.eventId = :eventId', { eventId })
+      .andWhere('registration.status != :cancelled', {
+        cancelled: 'cancelled',
+      })
+      .getMany();
+
+    let results = registrations;
 
     if (search) {
       const q = search.toLowerCase();
-      regs = regs.filter((r) => {
-        const user = this.usersService.findById(r.userId);
-        return (
-          user?.name.toLowerCase().includes(q) ||
-          user?.email.toLowerCase().includes(q)
-        );
-      });
+      results = (
+        await Promise.all(
+          registrations.map(async (r) => {
+            const user = await this.usersService.findById(r.userId);
+            return user &&
+              (user.name.toLowerCase().includes(q) ||
+                user.email.toLowerCase().includes(q))
+              ? r
+              : null;
+          }),
+        )
+      ).filter((r): r is Registration => r !== null);
     }
 
-    const total = regs.length;
+    const total = results.length;
     const offset = (page - 1) * limit;
-    const paged = regs.slice(offset, offset + limit);
+    const paged = results.slice(offset, offset + limit);
 
     return { registrations: paged, total };
   }
 
-  countByEventId(eventId: string): number {
-    return this.registrations.filter(
-      (r) => r.eventId === eventId && r.status !== 'cancelled',
-    ).length;
+  async countByEventId(eventId: string): Promise<number> {
+    return this.registrationRepository
+      .createQueryBuilder('registration')
+      .where('registration.eventId = :eventId', { eventId })
+      .andWhere('registration.status != :cancelled', {
+        cancelled: 'cancelled',
+      })
+      .getCount();
   }
 }
